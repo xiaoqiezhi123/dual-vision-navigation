@@ -1,0 +1,7 @@
+action_list: 63
+vx_max: 1.5
+vx_min: -1.4
+vy_max: 0.4
+vy_min: -0.4
+omegaz_max: 0.9
+omegaz_min: -0.9

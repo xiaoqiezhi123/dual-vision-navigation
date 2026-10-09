@@ -1,0 +1,202 @@
+DriverVersion: 0.0.0
+
+#####################################################################################################
+#
+# ControlMode: 0 无控制， 1 电流控制， 2 速度控制， 3 位置控制， 4 PD控制， 5制动控制， FF 开环控制。
+# FastMode: 1 开启， 0 关闭
+#
+#
+#
+#####################################################################################################
+
+Network:
+  LocalIp: 192.168.3.245
+  LocalPort: 15021
+  DestPort: 14999
+  CommunicationFre: 500
+  DestIp: 192.168.3.11
+
+Motors:
+
+  - Motor:
+      MainBoard: 2
+      CanId: 1
+      Id:  31
+      Name: 13_BAN_2_CAN_1_1
+      ControlMode: 0x0B
+      FastMode: 1
+      PosKp: 0
+      VelKp: 0.1
+      VelKi: 0.01
+      PDKp: 50
+      PDKd: 5
+      Direction: 1
+
+  - Motor:
+      MainBoard: 2
+      CanId: 1
+      Id: 32
+      Name: 01_BAN_2_CAN_1_2
+      ControlMode: 0x0B
+      FastMode: 1
+      PosKp: 0
+      VelKp: 0.1
+      VelKi: 0.01
+      PDKp: 50
+      PDKd: 5
+      Direction: 1
+
+  - Motor:
+      MainBoard: 2
+      CanId: 1
+      Id: 33
+      Name: 02_BAN_2_CAN_1_3
+      ControlMode: 0x0B
+      FastMode: 1
+      PosKp: 0
+      VelKp: 0.1
+      VelKi: 0.01
+      PDKp: 50
+      PDKd: 5
+      Direction: 1
+
+  - Motor:
+      MainBoard: 2
+      CanId: 1
+      Id: 34
+      Name: 03_BAN_2_CAN_1_4
+      ControlMode: 0x0B
+      FastMode: 1
+      PosKp: 0
+      VelKp: 0.1
+      VelKi: 0.01
+      PDKp: 50
+      PDKd: 5
+      Direction: -1
+
+  - Motor:
+      MainBoard: 2
+      CanId: 1
+      Id: 35
+      Name: 04_BAN_2_CAN_1_5
+      ControlMode: 0x0B
+      FastMode: 1
+      PosKp: 0
+      VelKp: 0.1
+      VelKi: 0.01
+      PDKp: 50
+      PDKd: 5
+      Direction: -1
+
+  - Motor:
+      MainBoard: 2
+      CanId: 1
+      Id: 36
+      Name: 05_BAN_2_CAN_1_6
+      ControlMode: 0x0B
+      FastMode: 1
+      PosKp: 0
+      VelKp: 0.1
+      VelKi: 0.01
+      PDKp: 50
+      PDKd: 5
+      Direction: 1
+
+  - Motor:
+      MainBoard: 2
+      CanId: 1
+      Id: 37
+      Name: 06_BAN_2_CAN_1_7
+      ControlMode: 0x0B
+      FastMode: 1
+      PosKp: 0
+      VelKp: 0.1
+      VelKi: 0.01
+      PDKp: 50
+      PDKd: 5
+      Direction: 1
+
+  - Motor:
+      MainBoard: 2
+      CanId: 2
+      Id: 42
+      Name: 07_BAN_2_CAN_2_1
+      ControlMode: 0x0B
+      FastMode: 1
+      PosKp: 0
+      VelKp: 0.1
+      VelKi: 0.01
+      PDKp: 50
+      PDKd: 5
+      Direction: -1
+
+
+  - Motor:
+      MainBoard: 2
+      CanId: 2
+      Id: 43
+      Name: 08_BAN_2_CAN_2_2
+      ControlMode: 0x0B
+      FastMode: 1
+      PosKp: 0
+      VelKp: 0.1
+      VelKi: 0.01
+      PDKp: 50
+      PDKd: 5
+      Direction: -1
+
+  - Motor:
+      MainBoard: 2
+      CanId: 2
+      Id: 44
+      Name: 09_BAN_2_CAN_2_3
+      ControlMode: 0x0B
+      FastMode: 1
+      PosKp: 0
+      VelKp: 0.1
+      VelKi: 0.01
+      PDKp: 50
+      PDKd: 5
+      Direction: 1
+
+  - Motor:
+      MainBoard: 2
+      CanId: 2
+      Id: 45
+      Name: 10_BAN_2_CAN_2_4
+      ControlMode: 0x0B
+      FastMode: 1
+      PosKp: 0
+      VelKp: 0.1
+      VelKi: 0.01
+      PDKp: 50
+      PDKd: 5
+      Direction: -1
+
+  - Motor:
+      MainBoard: 2
+      CanId: 2
+      Id: 46
+      Name: 11_BAN_2_CAN_2_5
+      ControlMode: 0x0B
+      FastMode: 1
+      PosKp: 0
+      VelKp: 0.1
+      VelKi: 0.01
+      PDKp: 50
+      PDKd: 5
+      Direction: -1
+
+  - Motor:
+      MainBoard: 2
+      CanId: 2
+      Id: 47
+      Name: 12_BAN_2_CAN_2_6
+      ControlMode: 0x0B
+      FastMode: 1
+      PosKp: 0
+      VelKp: 0.1
+      VelKi: 0.01
+      PDKp: 50
+      PDKd: 5
+      Direction: -1

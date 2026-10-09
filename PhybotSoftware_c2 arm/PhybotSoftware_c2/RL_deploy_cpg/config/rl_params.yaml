@@ -1,0 +1,53 @@
+# policy_path: ../RL_deploy_cpg/model/alt/0513_1650_7000cpg_policy.pt
+policy_onnx_path: ../RL_deploy_cpg/model/phybot_cpg_policy.onnx
+
+decimation: 6
+num_proprio: 73
+
+clip_obs: 50.0
+clip_actions_lower: -50.0
+clip_actions_upper: 50.0
+
+rl_p: [100.0, 100.0, 100.0, 100.0, 50.0, 50.0,
+       100.0, 100.0, 100.0, 100.0, 50.0, 50.0,
+       20,
+       50.0, 50.0, 50.0, 50.0,
+       50.0, 50.0, 50.0, 50.0, ]
+
+rl_d: [5, 5, 5.0, 5.0, 5.0, 5.0,
+       5, 5.0, 5.0, 5.0, 5.0, 5.0,
+       10.0,
+       5.0, 5.0, 5.0, 5.0, 
+       5.0, 5.0, 5.0, 5.0, ]
+
+
+action_scale: [0.2, 0.2, 0.2, 0.2, 0.2, 0.2,
+       0.2, 0.2, 0.2, 0.2, 0.2, 0.2,
+       0.2,
+       0.2, 0.2,0.2, 0.2, 
+       0.2, 0.2,0.2, 0.2,  ]
+
+num_of_dofs: 21
+history_len: 20
+num_of_heights: 625
+
+lin_vel_scale: 1.0
+ang_vel_scale: 0.25
+dof_pos_scale: 1.0
+dof_vel_scale: 0.05
+torque_limits: [200.0, 80.0, 58.0, 80.0, 58.0, 58.0,
+                200.0, 80.0, 58.0, 80.0, 58.0, 58.0,
+                58.0,
+                58.0, 58.0, 58.0, 58.0,
+                58.0, 58.0, 58.0, 58.0]
+
+default_dof_pos: [-0.242, 0.029, 0.007, 0.49, -0.295, 0.0,
+                  -0.242, -0.029, -0.007, 0.49, -0.295, 0.0,
+                   0.0,
+                   0.0, 0.0, 0.0, -0.17,
+                   0.0, -0.0, 0.0, -0.17]
+useless_joint_id: []
+
+# Logging configuration
+enable_task_obs_logging: true
+task_obs_log_path: "../RL_deploy_cpg/logs/log_data.csv"

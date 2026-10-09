@@ -58,3 +58,11 @@ backup_pre_max_landmark_y/
 
 # Keep ONNX models, OBJ/STL meshes, and upstream test_data in source control.
 # In this project .obj files are robot/scene meshes, not compiler output.
+
+# Robot-side dependencies and generated outputs
+# ThirdParty is also excluded by the robot project's original .gitignore.
+/PhybotSoftware_c2 arm/PhybotSoftware_c2/ThirdParty/
+/PhybotSoftware_c2 arm/PhybotSoftware_c2/lcm_server/lcm/release/bin/
+.catkin_tools/
+log/
+logdata/

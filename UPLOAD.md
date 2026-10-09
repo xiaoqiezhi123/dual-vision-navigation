@@ -1,6 +1,27 @@
 # 上传 GitHub
 
-本目录已经包含选定的四个模块、整理后的仓库首页和原 README 文档。原工程不受影响。
+本目录已经包含选定的五个模块（含 `PhybotSoftware_c2 arm`）、整理后的仓库首页和原 README 文档。原工程不受影响。
+
+当前目录已初始化 Git，并已有首次提交。第 1～4 节留作首次建仓参考；追加机器人端时直接使用下面的步骤，不需要再次初始化或添加 `origin`。
+
+## 追加机器人端
+
+机器人端上传副本已经准备好，详见 [整理说明](docs/robotside.md)。在终端中执行：
+
+```bash
+cd '/home/chaochao/桌面/双视觉版本/github-upload'
+git add 'PhybotSoftware_c2 arm' README.md UPLOAD.md .gitignore docs/robotside.md
+git diff --cached --stat
+```
+
+确认暂存内容后提交和推送：
+
+```bash
+git commit -m 'Add Phybot robot-side control software'
+git push -u origin main
+```
+
+目录名带空格，命令中的引号需要保留。整理操作只准备工作区文件，没有代为提交或推送。
 
 ## 1. 创建远程空仓库
 
@@ -10,7 +31,7 @@
 
 ## 2. 在这个上传目录初始化 Git
 
-下面的命令由你在终端中执行。本次整理尚未初始化仓库、提交或推送。
+下面是首次初始化的参考命令；已经有 `.git` 的当前上传目录无需重复执行。
 
 ```bash
 cd '/home/chaochao/桌面/双视觉版本/github-upload'
