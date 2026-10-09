@@ -1,0 +1,105 @@
+失败 
+
+
+
+
+load extensions from /home/amov/cuvslam_migrate-9.1/venv/lib/python3.10/site-packages/extensions
+参考地图: 8848 (/home/amov/cuvslam_migrate-9.1/orbbec/8848) —— 仅用于任务点锚定，退出时不写回。
+Traceback (most recent call last):
+  File "/home/amov/cuvslam_migrate-9.1/orbbec/run_vio_tasknav.py", line 2077, in <module>
+    main()
+  File "/home/amov/cuvslam_migrate-9.1/orbbec/run_vio_tasknav.py", line 1401, in main
+    ir_pipeline = open_camera_pipeline(CAMERA_A_SERIAL)
+  File "/home/amov/cuvslam_migrate-9.1/orbbec/run_vio_tasknav.py", line 474, in open_camera_pipeline
+    raise RuntimeError(
+RuntimeError: 未找到序列号 'CPC8763000MZ' 的相机（当前已连接 1 台；最后错误: Device not found by serial number: CPC8763000MZ）。请重插该相机 USB（或重启）后重试。
+
+
+
+
+
+
+
+
+
+
+amov@tegra-ubuntu:~/navside_real/NavSide_log/Navside-9.1$ ./run_task_nav.sh 
+[TASK] 任务导航调度器启动
+[TASK]   参考地图: 8848  任务点数: 3
+[TASK]   相机(SLAM)=CPC8763000MZ  相机(NavSide深度)=CPC8763000J0
+[TASK]   SLAM: /home/amov/cuvslam_migrate-9.1/run_orbbec_tasknav.sh --no-viz --ref-map 8848 --scheduler
+[TASK]   NAV : /home/amov/navside_real/NavSide_log/Navside-9.1/.venv_navside/bin/python /home/amov/navside_real/NavSide_log/Navside-9.1/scripts/run_nav.py --real --config /home/amov/navside_real/NavSide_log/Navside-9.1/config/nav.yaml --show-depth   （独立交互终端窗口，按键最高优先级）
+[TASK]   到达判定: VIO 位姿距任务点 ≤ 0.7m 持续 1.0s（--arrive-tolerance 可单独调整）
+[TASK]   SLAM 日志: /home/amov/navside_real/NavSide_log/Navside-9.1/logs/task_nav/slam_20260917_064107.log
+[TASK]   SLAM 事件通道: /home/amov/navside_real/NavSide_log/Navside-9.1/logs/task_nav/slam_sched_20260917_064107.log（[SCHED] 双写留痕）
+[TASK]   NAV  指令/状态通道: /home/amov/navside_real/NavSide_log/Navside-9.1/logs/task_nav/nav_cmd_20260917_064107.log / /home/amov/navside_real/NavSide_log/Navside-9.1/logs/task_nav/nav_sched_20260917_064107.log
+[TASK] 已打开 NavSide 交互终端窗口（面板按键最高优先级，可随时停车）
+[TASK] 已打开 cuvSlam 观察窗口
+[TASK] SLAM 已就绪
+[TASK] 等待 cuvslam 启动自动锚定（首帧 localize）...（NavSide 仍在启动，命令会在其文件通道排队）
+[TASK] 锚定流程开始...
+[TASK] NAV 已就绪（主循环运行中）
+[TASK] 启动锚定成功，坐标系已对齐参考地图全局系
+[TASK] 开始第 1/3 段：任务点(cuvslam)=(0.0,0.0,4.5) → goal(Z-up)=(4.500,-0.000,0.695)
+[TASK] → SLAM: resume
+[TASK] → NAV: goal 4.500 -0.000 0.695
+[TASK] → NAV: S
+[TASK] SLAM: [diag] 主循环上一轮耗时 4.2s
+[TASK] 第 1 段到达：先停推理，再关 VIO，机器人停止
+[TASK] → NAV: A
+[TASK] → SLAM: pause
+[TASK] → SLAM: msg 已到达任务点 1/3：请将机器人推到下一任务点，静止后输入 localize
+[TASK] 已到任务点 1/3：请将机器人推到下一任务点，调整好位姿后输入 localize 重定位，成功后自动开始下一段。
+localize
+[TASK] → SLAM: localize
+[TASK] 锚定流程开始...
+[TASK] 锚定位姿 (x=-0.006, z=4.436) 距任务点 1 偏差 0.06m
+[TASK] 任务点 1/3 完成（锚定偏差 0.06m ≤ 5.0m），推进
+[TASK] 开始第 2/3 段：任务点(cuvslam)=(0.0,0.0,11.0) → goal(Z-up)=(11.000,-0.000,0.695)
+[TASK] → SLAM: resume
+[TASK] → NAV: goal 11.000 -0.000 0.695
+[TASK] → NAV: S
+[TASK] SLAM: [diag] 主循环上一轮耗时 3.8s
+[TASK] WARNING: SLAM 进程意外退出（第 1 次），10s 后自动重启（等相机 USB 重新枚举）...
+[TASK] SLAM 已重启（#1）：日志 slam_r1_064202.log
+[TASK] 等待重启后的启动自动锚定（在机器人当前位置锚定）...
+[TASK] WARNING: SLAM 进程意外退出（第 2 次），10s 后自动重启（等相机 USB 重新枚举）...
+[TASK] SLAM 已重启（#2）：日志 slam_r2_064230.log
+[TASK] 等待重启后的启动自动锚定（在机器人当前位置锚定）...
+[TASK] SLAM 已就绪
+[TASK] 锚定流程开始...
+[TASK] SLAM: [localize] FAILED (coarse): Can't localize in map using provided image and guess
+[TASK] 锚定失败/超时（cuvslam 返回失败）
+[TASK] 启动锚定未完成：请重新调整机器人位姿（移动/转向）后输入 localize 重试。
+[TASK] SLAM: [diag] 主循环上一轮耗时 11.9s
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+amov@tegra-ubuntu:~/navside_real/NavSide_log/Navside-9.1$ python3 scripts/analyze_slam_log.py
+======================================================================
+文件: logs/task_nav/slam_sched_r2_064230.log
+位姿行数: 0  事件: ['anchor=busy', 'anchor=ok/fail']
+
+-- 位姿流空洞 (>0.5s) --
+   无空洞，位姿流稳定 ~10Hz
+
+-- 对应 slam 日志的掉帧警告（交叉验证） --
+   Warning: IMU drops detected (1 total, last gap: 11709.98 ms)
+   Warning: Camera stream message drop: timestamp gap (11808.26 ms) exceeds threshold 105.00 ms (1 total)
+amov@tegra-ubuntu:~/navside_real/NavSide_log/Navside-9.1$ 
+

@@ -1,0 +1,25 @@
+# Minimum CMake required
+cmake_minimum_required(VERSION 3.1.3)
+#工程名称
+project(FZMotionReceiveDLL_Sample)
+
+#设置C++标准
+set(CMAKE_CXX_STANDARD 14)
+
+#设置编译器编译模式
+set(CMAKE_BUILD_TYPE "Release")
+set(CMAKE_CXX_FLAGS_RELEASE "-O3")
+
+#添加依赖库路径
+link_directories(${PROJECT_SOURCE_DIR}/LuMoSDK/lib) 
+
+set(CMAKE_BUILD_RPATH "$ORIGIN/../LuMoSDK/lib")
+#添加共享库的源代码
+add_executable(LuMoSDK_Sample FZMotion_Receive_Sample.cpp)
+
+
+#添加依赖库的头文件路径
+target_include_directories(LuMoSDK_Sample PUBLIC LuMoSDK/include)
+
+#添加依赖库
+target_link_libraries(LuMoSDK_Sample LuMoSDK)

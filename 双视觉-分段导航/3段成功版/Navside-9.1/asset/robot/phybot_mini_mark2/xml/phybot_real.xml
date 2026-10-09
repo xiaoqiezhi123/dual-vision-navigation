@@ -1,0 +1,465 @@
+<mujoco model="phybot_street_scene">
+  <compiler angle="radian" meshdir="../meshes" autolimits="true"/>
+  <option timestep="0.002" iterations='10' solver='PGS' gravity='0 0 -9.81' >
+  </option>
+  <size njmax="2000" nconmax="500" />
+  
+  <visual>
+      <quality shadowsize='8192'/>
+      <map force="0.1" zfar="1000" znear='0.05'/>
+      <rgba haze="0.15 0.25 0.35 1"/>
+      <global offwidth="2560" offheight="1440" elevation="-20" azimuth="120"/>
+  </visual>
+
+  <statistic center="0 0 1" extent="10"/>
+  
+  <default>
+    <geom  condim='4' solref='0.001 2' friction='1.0 0.5 0.5'/>
+    <equality solref='0.001 2'/>
+  </default>
+
+  <default>
+    <default class="phybot_mini_mark2">
+      <joint damping="0.1" armature="0.1"/>
+      <default class="visual">
+        <geom type="mesh" contype="0" conaffinity="0" group="2" />
+      </default>
+      <default class="collision">
+        <geom group="3" mass="0" density="0" friction="1.0 0.5 0.5" />
+      </default>
+    </default>
+    
+    <!-- 障碍物默认属性：有碰撞，有质量(或固定) -->
+    <default class="obstacle">
+        <geom condim="3" contype="1" conaffinity="1" friction="0.8 0.5 0.5"/>
+    </default>
+  </default>
+
+  <!-- ==================== 资源定义 ==================== -->
+  <asset>
+    <!-- 1. 机器人网格 -->
+    <mesh name="base_link" file="base_link.STL"/>
+    <mesh name="left_hip_pitch" file="left_hip_pitch.STL"/>
+    <mesh name="left_hip_roll" file="left_hip_roll.STL"/>
+    <mesh name="left_hip_yaw" file="left_hip_yaw.STL"/>
+    <mesh name="left_knee" file="left_knee.STL"/>
+    <mesh name="right_ankle_pitch" file="right_ankle_pitch.STL"/>
+    <mesh name="left_ankle_roll" file="left_ankle_roll.STL"/>
+    <mesh name="right_hip_pitch" file="right_hip_pitch.STL"/>
+    <mesh name="right_hip_roll" file="right_hip_roll.STL"/>
+    <mesh name="right_hip_yaw" file="right_hip_yaw.STL"/>
+    <mesh name="right_knee" file="right_knee.STL"/>
+    <mesh name="right_ankle_roll" file="right_ankle_roll.STL"/>
+    <mesh name="torso" file="torso.STL"/>
+    <mesh name="left_shoulder_pitch" file="left_shoulder_pitch.STL"/>
+    <mesh name="left_shoulder_roll" file="left_shoulder_roll.STL"/>
+    <mesh name="left_shoulder_yaw" file="left_shoulder_yaw.STL"/>
+    <mesh name="left_elbow_pitch" file="left_elbow_pitch.STL"/>
+    <mesh name="right_shoulder_pitch" file="right_shoulder_pitch.STL"/>
+    <mesh name="right_shoulder_roll" file="right_shoulder_roll.STL"/>
+    <mesh name="right_shoulder_yaw" file="right_shoulder_yaw.STL"/>
+    <mesh name="right_elbow_pitch" file="right_elbow_pitch.STL"/>
+    <mesh name="right_elbow_yaw" file="right_elbow_yaw.STL"/>
+    <mesh name="neck_yaw" file="neck_yaw.STL"/>
+    <mesh name="neck_pitch" file="neck_pitch.STL"/>
+    
+    <texture type="skybox" builtin="gradient" rgb1=".3 .5 .7" rgb2="0 0 0" width="32" height="512"/>
+    
+    <!-- 2. 场景纹理 -->
+    <!-- [ROAD] 地面 -->
+    <texture name="tex_asphalt" type="2d" file="textures/sidewalk.png"/>
+    <material name="mat_road" texture="tex_asphalt" texrepeat="1 1" reflectance="0" shininess="0" specular="0.1" texuniform="true"/>
+
+    <!-- 人行道 -->
+    <texture name="tex_sidewalk" type="2d" file="textures/sidewalk.png"/>
+    <material name="mat_sidewalk" texture="tex_sidewalk" texrepeat="2 2.5" reflectance="0" shininess="0" specular="0.1" texuniform="true"/>
+
+    <!--楼房侧面 -->
+    <texture name="tex_building" type="2d" file="textures/building1.png"/>
+    
+    <!-- 添加 texuniform="true"，texrepeat 为 1 1 (每米重复1次) -->
+    <!-- 保证细节清晰 -->
+    <material name="mat_building_real_1" texture="tex_building" texrepeat="1 1" texuniform="true" emission="0.3" reflectance="0" shininess="0" rgba="1 1 1 1"/>
+
+    <material name="mat_building_real_2" texture="tex_building" texrepeat="1 1" texuniform="true" emission="0.3" reflectance="0" shininess="0" rgba="0.9 0.9 1.0 1"/>
+
+    <!-- 屋顶 -->
+    <texture name="tex_roof" type="2d" builtin="flat" rgb1="0.4 0.4 0.45" width="128" height="128"/>
+    <material name="mat_roof" texture="tex_roof" reflectance="0.05"/>
+    
+    <!-- 汽车材质 -->
+    <material name="mat_car_body" rgba="0.8 0.1 0.1 1" specular="0.8" shininess="0.5" reflectance="0.3"/>
+    <material name="mat_car_body_blue" rgba="0.1 0.1 0.8 1" specular="0.8" shininess="0.5" reflectance="0.3"/>
+    <material name="mat_car_glass" rgba="0.1 0.1 0.2 0.8" specular="1" shininess="0.9" reflectance="0.5"/>
+    <material name="mat_car_wheel" rgba="0.1 0.1 0.1 1" specular="0" shininess="0"/>
+    <!-- 行人材质 -->
+    <material name="mat_person_1" rgba="0.2 0.6 0.2 1"/>
+    <material name="mat_person_2" rgba="0.8 0.5 0.2 1"/>
+    <material name="mat_skin" rgba="0.9 0.7 0.6 1"/>
+    <!-- 路灯材质 -->
+    <material name="mat_pole" rgba="0.3 0.3 0.3 1" specular="0.5" shininess="0.5"/>
+    <material name="mat_light_bulb" rgba="1 1 0.8 1" emission="1"/>
+    <!-- 路障材质 -->
+    <material name="mat_cone_orange" rgba="1 0.5 0 1" reflectance="0.5"/>
+    
+    <mesh name="mesh_table_chairs" file="Table And Chairs.obj" scale="0.02 0.02 0.02"/>
+    <material name="mat_wood" rgba="0.6 0.4 0.2 1" specular="0.1" shininess="0.1"/>
+    
+    <mesh name="mesh_car" file="car.obj" scale="0.03 0.03 0.03"/>
+    <material name="mat_car" rgba="0.8 0.1 0.1 1" specular="0.1" shininess="0.1"/>
+    
+    <mesh name="mesh_tree" file="tree.obj" scale="0.7 0.7 0.7"/>
+    <texture name="tex_tree" type="2d" file="textures/tree.png"/>
+    <material name="mat_tree" texture="tex_tree" rgba="0.2 0.8 0.1 1" specular="0.1" shininess="0.1"/>
+    
+    <mesh name="mesh_human" file="human.obj" scale="0.015 0.015 0.015"/>
+    <material name="mat_human" rgba="0.2 0.4 0.3 1" specular="0.1" shininess="0.1"/>
+    
+  </asset>
+
+
+  <!-- ==================== 场景构建 ==================== -->
+  <worldbody>
+    <!-- 增加一点环境光(ambient)，确保暗部也有细节 -->
+    <light pos="0 0 15" dir="0 0 -1" directional="true" castshadow="true" diffuse="0.9 0.9 0.9" specular="0.1 0.1 0.1"/>
+
+    <!-- 地面 -->
+    <geom name="road_ground" type="plane" pos="0 0 0" size="50 50 0.125" material="mat_road" condim="3" conaffinity="1" contype="1" rgba="1 1 1 1"/>
+ 
+    <!-- 左侧路灯 -->
+    <body name="streetlight_L1" pos="-10 6.5 0">
+        <geom type="cylinder" size="0.1 3" pos="0 0 3" material="mat_pole" class="obstacle"/> <!-- 柱子 -->
+        <geom type="cylinder" size="0.08 0.5" pos="0 -0.5 5.8" euler="1.57 0 0" material="mat_pole" class="obstacle"/> <!-- 横杆 -->
+        <geom type="sphere" size="0.2" pos="0 -1.0 5.6" material="mat_light_bulb" class="obstacle"/> <!-- 灯泡 -->
+        <light pos="0 -1.0 5.0" dir="0 0 -1" diffuse="0.8 0.8 0.6" attenuation="1 0 0"/> <!-- 真实点光源 -->
+    </body>
+    <body name="streetlight_L2" pos="10 6.5 0">
+        <geom type="cylinder" size="0.1 3" pos="0 0 3" material="mat_pole" class="obstacle"/>
+        <geom type="cylinder" size="0.08 0.5" pos="0 -0.5 5.8" euler="1.57 0 0" material="mat_pole" class="obstacle"/>
+        <geom type="sphere" size="0.2" pos="0 -1.0 5.6" material="mat_light_bulb" class="obstacle"/>
+    </body>
+    <body name="streetlight_L3" pos="30 6.5 0">
+        <geom type="cylinder" size="0.1 3" pos="0 0 3" material="mat_pole" class="obstacle"/>
+        <geom type="cylinder" size="0.08 0.5" pos="0 -0.5 5.8" euler="1.57 0 0" material="mat_pole" class="obstacle"/>
+        <geom type="sphere" size="0.2" pos="0 -1.0 5.6" material="mat_light_bulb" class="obstacle"/>
+    </body>
+    <!-- 右侧路灯 -->
+    <body name="streetlight_R1" pos="0 -6.5 0">
+        <geom type="cylinder" size="0.1 3" pos="0 0 3" material="mat_pole" class="obstacle"/>
+        <geom type="cylinder" size="0.08 0.5" pos="0 0.5 5.8" euler="1.57 0 0" material="mat_pole" class="obstacle"/>
+        <geom type="sphere" size="0.2" pos="0 1.0 5.6" material="mat_light_bulb" class="obstacle"/>
+    </body>
+    <body name="streetlight_R2" pos="20 -6.5 0">
+        <geom type="cylinder" size="0.1 3" pos="0 0 3" material="mat_pole" class="obstacle"/>
+        <geom type="cylinder" size="0.08 0.5" pos="0 0.5 5.8" euler="1.57 0 0" material="mat_pole" class="obstacle"/>
+        <geom type="sphere" size="0.2" pos="0 1.0 5.6" material="mat_light_bulb" class="obstacle"/>
+    </body>
+    <!-- 目标点 -->
+    <body name="target_marker_body" pos="0 0 0">
+        <geom name="target_marker" type="sphere" size="0.01" rgba="0 1 0 1" contype="0" conaffinity="0"/>
+    </body>
+    
+        <!-- 桌椅障碍物 -->
+    <body name="obstacle_furniture" pos="2.5 0 0.05" euler="0 0 0">
+        <!-- ================== 视觉层 (Visual) ================== -->
+        <!-- group="2" 是之前定义的视觉组，contype/conaffinity=0 表示无物理碰撞 -->
+        <geom type="mesh" mesh="mesh_table_chairs" material="mat_wood"
+              contype="0" conaffinity="0" group="2" 
+              pos="0 0 0" euler="1.57 0 0"/> 
+              <!-- 注意：很多 obj 导入后会躺在地上，通常需要绕 X 轴转 90 度 (1.57 弧度) 立起来，如果方向不对请调整这里 -->
+        <!-- ================== 物理层 (Collision) ================== -->
+        <!-- 这一层负责“挡路”，用简单的几何体 -->
+        <!-- 用一个隐形的大盒子把桌椅全包起来，机器人走不过去 -->
+        <!-- 假设桌椅占地 2米x2米，高1米 -->
+        <geom type="box" size="1.0 1.0 0.5" pos="0 0 0.5" 
+              class="obstacle" group="3" rgba="1 0 0 0.5"/> 
+              <!-- rgba最后一位是0表示全透明(隐形)。调试时可以改成 0.5 看看盒子在哪 -->
+    </body>
+    
+    <body name="obstacle_furniture1" pos="2 13 0.05" euler="0 0 0">
+        <geom type="mesh" mesh="mesh_table_chairs" material="mat_wood"
+              contype="0" conaffinity="0" group="2" 
+              pos="0 0 0" euler="1.57 0 0"/> 
+        <geom type="box" size="1.0 1.0 0.5" pos="0 0 0.5" 
+              class="obstacle" group="3" rgba="1 0 0 0.5"/> 
+    </body>
+    
+    <!-- <body name="obstacle_car" pos="10 1 -0.1" euler="0 0 0">
+	<geom type="mesh" mesh="mesh_car" material="mat_car"
+	      contype="0" conaffinity="0" group="2" 
+	      pos="0 0 0" euler="1.57 0 0"/> 
+	<geom type="box" size="1.0 1.0 0.5" pos="0 0 0.5" 
+	      class="obstacle" group="3" rgba="1 0 0 0.5"/> 
+    </body> -->
+    
+    <body name="obstacle_tree" pos="2.5 10 -0.1" euler="0 0 0">
+	<geom type="mesh" mesh="mesh_tree" material="mat_tree"
+	      contype="0" conaffinity="0" group="2" 
+	      pos="0 0 0" euler="1.57 0 0"/> 
+	<geom type="box" size="1.0 1.0 0.5" pos="0 0 0.5" 
+	      class="obstacle" group="3" rgba="1 0 0 0.5"/> 
+    </body>
+
+    <body name="obstacle_tree1" pos="2.5 -10 -0.1" euler="0 0 0">
+	<geom type="mesh" mesh="mesh_tree" material="mat_tree"
+	      contype="0" conaffinity="0" group="2" 
+	      pos="0 0 0" euler="1.57 0 0"/> 
+	<geom type="box" size="1.0 1.0 0.5" pos="0 0 0.5" 
+	      class="obstacle" group="3" rgba="1 0 0 0.5"/> 
+    </body>
+    
+    <body name="obstacle_human" pos="2.5 20 -0.1" euler="-1.57 0 0">
+	<geom type="mesh" mesh="mesh_human" material="mat_human"
+	      contype="0" conaffinity="0" group="2" 
+	      pos="0 0 0" euler="1.57 0 0"/> 
+	<geom type="box" size="1.0 1.0 0.5" pos="0 0 0.5" 
+	      class="obstacle" group="3" rgba="1 0 0 0.5"/> 
+    </body>
+
+
+    <!-- 机器人主体 -->
+    <body name="base_link" pos="0 0.0 0.695" euler="0 0 0" childclass="phybot_mini_mark2">
+      <inertial pos="0.00029935 -1.8119e-07 0.023406" quat="0.999999 0.000213974 0.00165245 0.00039263" mass="3.5" diaginertia="0.01330575 0.01205119 0.00625631"/>
+      <joint name="floating_base_joint" type="free" limited="false" actuatorfrclimited="false"/>
+      <geom type="mesh" contype="0" conaffinity="0" group="1" density="0" rgba="0.86667 0.86667 0.8902 1" mesh="base_link"/>
+      <geom type="sphere" size="0.07" pos="0.00259459 0 0.00656728" rgba="0.86667 0.86667 0.8902 1"/>
+      
+      <!-- Left Leg -->
+      <body name="left_hip_pitch" pos="0 0.0578 -0.00010315">
+        <inertial pos="-0.010451 0.062682 8.8167e-05" quat="0.083119 0.701134 -0.0837025 0.703204" mass="0.91049" diaginertia="0.000839681 0.000776212 0.000684886"/>
+        <joint name="left_hip_pitch" pos="0 0 0" axis="0 1 0" range="-2.62 2.62" actuatorfrcrange="-200 200"/>
+        <geom pos="0 0 0" type="mesh" contype="0" conaffinity="0" group="1" density="0" rgba="0.86667 0.86667 0.8902 1" mesh="left_hip_pitch"/>
+        <geom size="0.046" pos="-0.00436918 0.0615005 -0.00236015" rgba="0.86667 0.86667 0.8902 1"/>
+        <body name="left_hip_roll" pos="0 0.0645 0.00010315">
+            <inertial pos="0.017315 7.7056e-06 -0.027368" quat="0.938777 0.00153671 0.344522 0.000938653" mass="0.25544" diaginertia="0.000407279 0.00034617 0.000257411"/>
+            <joint name="left_hip_roll" pos="0 0 0" axis="1 0 0" range="-0.1 2.79" actuatorfrcrange="-80 80"/>
+            <geom type="mesh" contype="0" conaffinity="0" group="1" density="0" rgba="0.86667 0.86667 0.8902 1" mesh="left_hip_roll"/>
+            <body name="left_hip_yaw" pos="5.177e-05 0 -0.0555">
+                <inertial pos="-0.000660698 -0.000269523 -0.0709022" quat="0.99961 -0.00783722 0.0251877 -0.00915786" mass="1.18423" diaginertia="0.00392986 0.00371214 0.0011681"/>
+                <joint name="left_hip_yaw" pos="0 0 0" axis="0 0 1" range="-2.09 2.09" actuatorfrcrange="-58 58"/>
+                <geom type="mesh" contype="0" conaffinity="0" group="1" density="0" rgba="0.86667 0.86667 0.8902 1" mesh="left_hip_yaw"/>
+                <geom name="sphere_3" size="0.044 0.06" pos="0 0 -0.1" type="capsule" rgba="0.86667 0.86667 0.8902 1"/>
+                <body name="left_knee" pos="-0.015 0 -0.178">
+                    <inertial pos="0.00788863 8.73965e-05 -0.0948138" quat="0.661405 -0.0155255 -0.0140926 0.749736" mass="1.93631" diaginertia="0.0251976 0.0251419 0.00203863"/>
+                    <joint name="left_knee" pos="0 0 0" axis="0 1 0" range="0 2.44" actuatorfrcrange="-80 80"/>
+                    <geom type="mesh" contype="0" conaffinity="0" group="1" density="0" rgba="0.86667 0.86667 0.8902 1" mesh="left_knee"/>
+                    <geom name="sphere_4" size="0.042 0.075" pos="0 0 -0.16" type="capsule" rgba="0.86667 0.86667 0.8902 1"/>
+                    <body name="left_ankle_pitch" pos="0.015 0 -0.324">
+                        <inertial pos="-0.000464283 -0.000367434 -0.0356355" quat="0.997287 0.00504669 0.0068855 -0.0731111" mass="1.5" diaginertia="0.00275313 0.00275183 0.000964559"/>
+                        <joint name="left_ankle_pitch" pos="0 0 0" axis="0 1 0" range="-1.4 1.4" actuatorfrcrange="-58 58"/>
+                        <geom type="mesh" contype="0" conaffinity="0" group="1" density="0" rgba="0.86667 0.86667 0.8902 1" mesh="right_ankle_pitch"/>
+                        <geom size="0.048" pos="0 0 -0.0209636" rgba="0.86667 0.86667 0.8902 1"/>
+                        <body name="left_ankle_roll" pos="0.038948 4.7715e-05 -0.069">
+                            <inertial pos="-0.00706776 4.03562e-05 -0.0350697" quat="0.00111808 0.725531 0.0017096 0.688187" mass="1.36346" diaginertia="0.0069294 0.00649197 0.00171846"/>
+                            <joint name="left_ankle_roll" pos="0 0 0" axis="1 0 0" range="-0.61 0.61" actuatorfrcrange="-58 58"/>
+                            <geom pos="0 0 0" type="mesh" contype="0" conaffinity="0" group="1" density="0" rgba="0.86667 0.86667 0.8902 1" mesh="left_ankle_roll"/>
+                            <geom name="left_ankle_roll_1" size="0.012 0.1" pos="0.008 -0.024 -0.052" quat="0.000563312 0.707388 0.000562864 -0.706825" type="capsule" rgba="0.86667 0.86667 0.8902 1"/>
+                            <geom name="left_ankle_roll_2" size="0.012 0.1" pos="0.008 0.024 -0.052" quat="0.000563312 0.707388 0.000562864 -0.706825" type="capsule" rgba="0.86667 0.86667 0.8902 1"/>
+                        </body>
+                    </body>
+                </body>
+            </body>
+        </body>
+      </body>
+
+      <!-- Right Leg -->
+      <body name="right_hip_pitch" pos="0 -0.0598 0">
+        <inertial pos="-0.0104986 -0.0606821 1.49808e-05" quat="-0.0841103 0.703157 0.0835219 0.701085" mass="0.910488" diaginertia="0.000839521 0.000776107 0.000684841"/>
+        <joint name="right_hip_pitch" pos="0 0 0" axis="0 1 0" range="-2.62 2.62" actuatorfrcrange="-200 200"/>
+        <geom pos="0 0 0" type="mesh" contype="0" conaffinity="0" group="1" density="0" rgba="0.86667 0.86667 0.8902 1" mesh="right_hip_pitch"/>
+        <geom size="0.046" pos="-0.00436918 -0.0615005 -0.00236015" rgba="0.86667 0.86667 0.8902 1"/>
+        <body name="right_hip_roll" pos="0 -0.0625 0">
+            <inertial pos="0.0172664 8.09741e-06 -0.0273683" quat="0.938745 0.0015365 0.344609 0.000938282" mass="0.255436" diaginertia="0.00040732 0.00034621 0.00025742"/>
+            <joint name="right_hip_roll" pos="0 0 0" axis="1 0 0" range="-2.79 0.1" actuatorfrcrange="-80 80"/>
+            <geom type="mesh" contype="0" conaffinity="0" group="1" density="0" rgba="0.86667 0.86667 0.8902 1" mesh="right_hip_roll"/>
+            <body name="right_hip_yaw" pos="0 0 -0.0555">
+                <inertial pos="-0.00162439 0.000656584 -0.113596" quat="0.998814 0.0138718 0.0459246 0.00834949" mass="0.434265" diaginertia="0.00195143 0.00173094 0.000762913"/>
+                <joint name="right_hip_yaw" pos="0 0 0" axis="0 0 1" range="-2.09 2.9" actuatorfrcrange="-58 58"/>
+                <geom type="mesh" contype="0" conaffinity="0" group="1" density="0" rgba="0.86667 0.86667 0.8902 1" mesh="right_hip_yaw"/>
+                <geom size="0.044 0.06" pos="0 0 -0.1" type="capsule" rgba="0.86667 0.86667 0.8902 1"/>
+                <body name="right_knee" pos="-0.015 0 -0.178">
+                    <inertial pos="0.00748147 0.000468573 -0.0967989" quat="0.723297 -0.0149086 -0.0167715 0.690173" mass="1.87028" diaginertia="0.0249554 0.0249148 0.00200181"/>
+                    <joint name="right_knee" pos="0 0 0" axis="0 1 0" range="0 2.44" actuatorfrcrange="-80 80"/>
+                    <geom type="mesh" contype="0" conaffinity="0" group="1" density="0" rgba="0.86667 0.86667 0.8902 1" mesh="right_knee"/>
+                    <geom size="0.042 0.075" pos="0 0 -0.16" type="capsule" rgba="0.86667 0.86667 0.8902 1"/>
+                    <body name="right_ankle_pitch" pos="0.015 0 -0.324">
+                        <inertial pos="-0.00043695 0.000369141 -0.0400577" quat="0.999953 -0.00483678 0.00579502 0.0060279" mass="1.5" diaginertia="0.00323949 0.00323821 0.000964532"/>
+                        <joint name="right_ankle_pitch" pos="0 0 0" axis="0 1 0" range="-1.4 1.4" actuatorfrcrange="-58 58"/>
+                        <geom type="mesh" contype="0" conaffinity="0" group="1" density="0" rgba="0.86667 0.86667 0.8902 1" mesh="right_ankle_pitch"/>
+                        <geom size="0.048" pos="0 0 -0.0209636" rgba="0.86667 0.86667 0.8902 1"/>
+                        <body name="right_ankle_roll" pos="0.039 -4.436e-05 -0.08">
+                            <inertial pos="-0.00935957 6.26081e-05 -0.025329" quat="0.00182563 0.727657 0.000844849 0.685938" mass="1.2444" diaginertia="0.00675175 0.00631519 0.00159091"/>
+                            <joint name="right_ankle_roll" pos="0 0 0" axis="1 0 0" range="-0.61 0.61" actuatorfrcrange="-58 58"/>
+                            <geom type="mesh" contype="0" conaffinity="0" group="1" density="0" rgba="0.86667 0.86667 0.8902 1" mesh="right_ankle_roll"/>
+                            <geom name="right_ankle_roll_1" size="0.012 0.1" pos="0.008 0.024 -0.042" quat="0.000563312 0.707388 0.000562864 -0.706825" type="capsule" rgba="0.86667 0.86667 0.8902 1"/>
+                            <geom name="right_ankle_roll_2" size="0.012 0.1" pos="0.008 -0.024 -0.042" quat="0.000563312 0.707388 0.000562864 -0.706825" type="capsule" rgba="0.86667 0.86667 0.8902 1"/>
+                        </body>
+                    </body>
+                </body>
+            </body>
+        </body>
+      </body>
+
+      <!-- Torso and Arms -->
+      <body name="waist_yaw" pos="0 0 0.255">
+        <inertial pos="-0.000621633 -0.00060824 0.0627254" quat="0.999923 -0.000821252 -0.0121552 -0.00232251" mass="8.843" diaginertia="0.120218 0.108604 0.0328178"/>
+        <joint name="waist_yaw" pos="0 0 0" axis="0 0 1" range="-2.62 2.62" actuatorfrcrange="-58 58"/>
+        <geom type="mesh" contype="0" conaffinity="0" group="1" density="0" rgba="0.86667 0.86667 0.8902 1" mesh="torso"/>
+        <geom size="0.063 0.09 0.125" pos="0.00027658 0.0003768 0" type="box" rgba="0.86667 0.86667 0.8902 1"/>
+        <geom pos="0 0 0.148" type="mesh" contype="0" conaffinity="0" group="1" density="0" rgba="0.86667 0.86667 0.8902 1" mesh="neck_yaw"/>
+        <geom pos="0 0 0.2075" type="mesh" contype="0" conaffinity="0" group="1" density="0" rgba="0.86667 0.86667 0.8902 1" mesh="neck_pitch"/>
+        <geom size="0.07" pos="0 0 0.263466" rgba="0.86667 0.86667 0.8902 1"/>
+        
+        <!-- Left Arm -->
+        <body name="left_shoulder_pitch" pos="0 0.1065 0.099">
+            <inertial pos="0.00071542 0.053508 -3.9443e-09" quat="0.5078 0.492077 -0.5078 0.492077" mass="0.783062" diaginertia="0.00061796 0.000532075 0.000496755"/>
+            <joint name="left_shoulder_pitch" pos="0 0 0" axis="0 1 0" range="-2.62 2.62" actuatorfrcrange="-58 58"/>
+            <geom pos="0 0 0" type="mesh" contype="0" conaffinity="0" group="1" density="0" rgba="0.86667 0.86667 0.8902 1" mesh="left_shoulder_pitch"/>
+            <geom size="0.042" pos="0 0.059495 0" rgba="0.86667 0.86667 0.8902 1"/>
+            <body name="left_shoulder_roll" pos="0 0.0575 0">
+                <inertial pos="0.022804 0.0039333 -0.017788" quat="0.940833 0.102634 0.321036 0.0351355" mass="0.17719" diaginertia="0.000256392 0.000194645 0.000139602"/>
+                <joint name="left_shoulder_roll" pos="0 0 0" axis="1 0 0" range="-0.26 2.62" actuatorfrcrange="-58 58"/>
+                <geom type="mesh" contype="0" conaffinity="0" group="1" density="0" rgba="0.86667 0.86667 0.8902 1" mesh="left_shoulder_roll"/>
+                <body name="left_shoulder_yaw" pos="0.00125 0.0097398 -0.043933" quat="0.994056 0.108869 0 0">
+                    <inertial pos="-0.00020494 -0.0060826 -0.12095" quat="0.997368 0.0724149 -0.00112664 0.00331653" mass="1.24393" diaginertia="0.00517735 0.00508953 0.000754096"/>
+                    <joint name="left_shoulder_yaw" pos="0 0 0" axis="0 0 1" range="-1.75 1.75" actuatorfrcrange="-9 9"/>
+                    <geom type="mesh" contype="0" conaffinity="0" group="1" density="0" rgba="0.86667 0.86667 0.8902 1" mesh="left_shoulder_yaw"/>
+                    <geom size="0.034 0.05" pos="0 0 -0.0868437" type="capsule" rgba="0.86667 0.86667 0.8902 1"/>
+                    <body name="left_elbow_pitch" pos="0 0 -0.163">
+                        <inertial pos="-0.00164426 -0.00265918 -0.140605" quat="0.974282 0.00758825 -0.012909 -0.224834" mass="1.06257" diaginertia="0.0069157 0.00687241 0.000534144"/>
+                        <joint name="left_elbow_pitch" pos="0 0 0" axis="0 1 0" range="-2.27 0.05" actuatorfrcrange="-58 58"/>
+                        <geom pos="0 0 0" type="mesh" contype="0" conaffinity="0" group="1" density="0" rgba="0.86667 0.86667 0.8902 1" mesh="left_elbow_pitch"/>
+                        <geom size="0.032 0.036" pos="0 -0.00576669 -0.072571" type="capsule" rgba="0.86667 0.86667 0.8902 1"/>
+                    </body>
+                </body>
+            </body>
+        </body>
+        
+        <!-- Right Arm -->
+        <body name="right_shoulder_pitch" pos="0 -0.1065 0.099">
+            <inertial pos="0.000715418 -0.0535077 3.94432e-09" quat="0.492077 0.5078 -0.492077 0.5078" mass="0.783062" diaginertia="0.00061796 0.000532075 0.000496755"/>
+            <joint name="right_shoulder_pitch" pos="0 0 0" axis="0 1 0" range="-2.62 2.62" actuatorfrcrange="-58 58"/>
+            <geom pos="0 0 0" type="mesh" contype="0" conaffinity="0" group="1" density="0" rgba="0.86667 0.86667 0.8902 1" mesh="right_shoulder_pitch"/>
+            <geom size="0.042" pos="0 -0.059495 0" rgba="0.86667 0.86667 0.8902 1"/>
+            <body name="right_shoulder_roll" pos="0 -0.0575 0">
+                <inertial pos="0.0228047 -0.00395395 -0.0177819" quat="0.940632 -0.103353 0.321391 -0.0351805" mass="0.177189" diaginertia="0.000256475 0.000194466 0.00013972"/>
+                <joint name="right_shoulder_roll" pos="0 0 0" axis="1 0 0" range="-2.62 0.26" actuatorfrcrange="-58 58"/>
+                <geom type="mesh" contype="0" conaffinity="0" group="1" density="0" rgba="0.86667 0.86667 0.8902 1" mesh="right_shoulder_roll"/>
+                <body name="right_shoulder_yaw" pos="0.00125 -0.0097398 -0.043933" quat="0.994056 -0.108869 0 0">
+                    <inertial pos="-0.000488895 0.00349494 -0.0642143" quat="0.582591 -0.0233421 0.0367723 0.811598" mass="0.51393" diaginertia="0.00151826 0.00151437 0.000271098"/>
+                    <joint name="right_shoulder_yaw" pos="0 0 0" axis="0 0 1" range="-1.75 1.75" actuatorfrcrange="-9 9"/>
+                    <geom type="mesh" contype="0" conaffinity="0" group="1" density="0" rgba="0.86667 0.86667 0.8902 1" mesh="right_shoulder_yaw"/>
+                    <geom size="0.034 0.05" pos="0 0 -0.0868437" type="capsule" rgba="0.86667 0.86667 0.8902 1"/>
+                    <body name="right_elbow_pitch" pos="0 0 -0.163">
+                        <inertial pos="-0.00163129 -0.0037679 -0.140601" quat="0.974683 -0.00789963 -0.0126972 0.223092" mass="1.06261" diaginertia="0.00691615 0.00687272 0.000534756"/>
+                        <joint name="right_elbow_pitch" pos="0 0 0" axis="0 1 0" range="-2.27 0.05" actuatorfrcrange="-58 58"/>
+                        <geom type="mesh" contype="0" conaffinity="0" group="1" density="0" rgba="0.86667 0.86667 0.8902 1" mesh="right_elbow_pitch"/>
+                        <geom size="0.032 0.036" pos="0 0.00576669 -0.072571" type="capsule" rgba="0.86667 0.86667 0.8902 1"/>
+                    </body>
+                </body>
+            </body>
+        </body>
+        
+        <camera name="head_camera" pos="0.1 0 0" xyaxes="0 -1 0 0 0 1" fovy="57"/>
+        
+        <body name="imu_link" pos="-0.0 0 0.0">
+            <inertial pos="0 0 0" mass="0" diaginertia="0 0 0" />
+            <geom class="visual" type="sphere" rgba="0.792157 0.819608 0.933333 1" size="0.02" />
+            <site name="site_imu" pos="0.01 0 0" size='0.01 0.01 0.01' group="4"/>
+        </body>
+      </body>
+    </body>
+    
+     <!-- 轨迹点可视化 -->
+    <geom name="goal" type="sphere" size="0.05" rgba="1 0 0 1" pos="0 0 -1"/>
+    <!-- 50个轨迹点 -->
+    <geom name="traj0" type="sphere" size="0.02" rgba="0 1 0 1" pos="0 0 -1"/>
+    <geom name="traj1" type="sphere" size="0.02" rgba="0 1 0 1" pos="0 0 -1"/>
+    <geom name="traj2" type="sphere" size="0.02" rgba="0 1 0 1" pos="0 0 -1"/>
+    <geom name="traj3" type="sphere" size="0.02" rgba="0 1 0 1" pos="0 0 -1"/>
+    <geom name="traj4" type="sphere" size="0.02" rgba="0 1 0 1" pos="0 0 -1"/>
+    <geom name="traj5" type="sphere" size="0.02" rgba="0 1 0 1" pos="0 0 -1"/>
+    <geom name="traj6" type="sphere" size="0.02" rgba="0 1 0 1" pos="0 0 -1"/>
+    <geom name="traj7" type="sphere" size="0.02" rgba="0 1 0 1" pos="0 0 -1"/>
+    <geom name="traj8" type="sphere" size="0.02" rgba="0 1 0 1" pos="0 0 -1"/>
+    <geom name="traj9" type="sphere" size="0.02" rgba="0 1 0 1" pos="0 0 -1"/>
+    <geom name="traj10" type="sphere" size="0.02" rgba="0 1 0 1" pos="0 0 -1"/>
+    <geom name="traj11" type="sphere" size="0.02" rgba="0 1 0 1" pos="0 0 -1"/>
+    <geom name="traj12" type="sphere" size="0.02" rgba="0 1 0 1" pos="0 0 -1"/>
+    <geom name="traj13" type="sphere" size="0.02" rgba="0 1 0 1" pos="0 0 -1"/>
+    <geom name="traj14" type="sphere" size="0.02" rgba="0 1 0 1" pos="0 0 -1"/>
+    <geom name="traj15" type="sphere" size="0.02" rgba="0 1 0 1" pos="0 0 -1"/>
+    <geom name="traj16" type="sphere" size="0.02" rgba="0 1 0 1" pos="0 0 -1"/>
+    <geom name="traj17" type="sphere" size="0.02" rgba="0 1 0 1" pos="0 0 -1"/>
+    <geom name="traj18" type="sphere" size="0.02" rgba="0 1 0 1" pos="0 0 -1"/>
+    <geom name="traj19" type="sphere" size="0.02" rgba="0 1 0 1" pos="0 0 -1"/>
+    <geom name="traj20" type="sphere" size="0.02" rgba="0 1 0 1" pos="0 0 -1"/>
+    <geom name="traj21" type="sphere" size="0.02" rgba="0 1 0 1" pos="0 0 -1"/>
+    <geom name="traj22" type="sphere" size="0.02" rgba="0 1 0 1" pos="0 0 -1"/>
+    <geom name="traj23" type="sphere" size="0.02" rgba="0 1 0 1" pos="0 0 -1"/>
+    <geom name="traj24" type="sphere" size="0.02" rgba="0 1 0 1" pos="0 0 -1"/>
+    <geom name="traj25" type="sphere" size="0.02" rgba="0 1 0 1" pos="0 0 -1"/>
+    <geom name="traj26" type="sphere" size="0.02" rgba="0 1 0 1" pos="0 0 -1"/>
+    <geom name="traj27" type="sphere" size="0.02" rgba="0 1 0 1" pos="0 0 -1"/>
+    <geom name="traj28" type="sphere" size="0.02" rgba="0 1 0 1" pos="0 0 -1"/>
+    <geom name="traj29" type="sphere" size="0.02" rgba="0 1 0 1" pos="0 0 -1"/>
+    <geom name="traj30" type="sphere" size="0.02" rgba="0 1 0 1" pos="0 0 -1"/>
+    <geom name="traj31" type="sphere" size="0.02" rgba="0 1 0 1" pos="0 0 -1"/>
+    <geom name="traj32" type="sphere" size="0.02" rgba="0 1 0 1" pos="0 0 -1"/>
+    <geom name="traj33" type="sphere" size="0.02" rgba="0 1 0 1" pos="0 0 -1"/>
+    <geom name="traj34" type="sphere" size="0.02" rgba="0 1 0 1" pos="0 0 -1"/>
+    <geom name="traj35" type="sphere" size="0.02" rgba="0 1 0 1" pos="0 0 -1"/>
+    <geom name="traj36" type="sphere" size="0.02" rgba="0 1 0 1" pos="0 0 -1"/>
+    <geom name="traj37" type="sphere" size="0.02" rgba="0 1 0 1" pos="0 0 -1"/>
+    <geom name="traj38" type="sphere" size="0.02" rgba="0 1 0 1" pos="0 0 -1"/>
+    <geom name="traj39" type="sphere" size="0.02" rgba="0 1 0 1" pos="0 0 -1"/>
+    <geom name="traj40" type="sphere" size="0.02" rgba="0 1 0 1" pos="0 0 -1"/>
+    <geom name="traj41" type="sphere" size="0.02" rgba="0 1 0 1" pos="0 0 -1"/>
+    <geom name="traj42" type="sphere" size="0.02" rgba="0 1 0 1" pos="0 0 -1"/>
+    <geom name="traj43" type="sphere" size="0.02" rgba="0 1 0 1" pos="0 0 -1"/>
+    <geom name="traj44" type="sphere" size="0.02" rgba="0 1 0 1" pos="0 0 -1"/>
+    <geom name="traj45" type="sphere" size="0.02" rgba="0 1 0 1" pos="0 0 -1"/>
+    <geom name="traj46" type="sphere" size="0.02" rgba="0 1 0 1" pos="0 0 -1"/>
+    <geom name="traj47" type="sphere" size="0.02" rgba="0 1 0 1" pos="0 0 -1"/>
+    <geom name="traj48" type="sphere" size="0.02" rgba="0 1 0 1" pos="0 0 -1"/>
+    <geom name="traj49" type="sphere" size="0.02" rgba="0 1 0 1" pos="0 0 -1"/>
+  </worldbody>
+  
+  <actuator>
+      <motor name="left_hip_pitch" joint="left_hip_pitch" gear="1" ctrllimited="true" ctrlrange="-200 200" />
+      <motor name="left_hip_roll" joint="left_hip_roll" gear="1" ctrllimited="true" ctrlrange="-136 136" />
+      <motor name="left_hip_yaw" joint="left_hip_yaw" gear="1" ctrllimited="true" ctrlrange="-96 96" />
+      <motor name="left_knee" joint="left_knee" gear="1" ctrllimited="true" ctrlrange="-136 136" />
+      <motor name="left_ankle_pitch" joint="left_ankle_pitch" gear="1" ctrllimited="true" ctrlrange="-96.0 96.0" />
+      <motor name="left_ankle_roll" joint="left_ankle_roll" gear="1" ctrllimited="true" ctrlrange="-96 96" />
+      <motor name="right_hip_pitch" joint="right_hip_pitch" gear="1" ctrllimited="true" ctrlrange="-244 244" />
+      <motor name="right_hip_roll" joint="right_hip_roll" gear="1" ctrllimited="true" ctrlrange="-136 136" />
+      <motor name="right_hip_yaw" joint="right_hip_yaw" gear="1" ctrllimited="true" ctrlrange="-96 96" />
+      <motor name="right_knee" joint="right_knee" gear="1" ctrllimited="true" ctrlrange="-136 136" />
+      <motor name="right_ankle_pitch" joint="right_ankle_pitch" gear="1" ctrllimited="true" ctrlrange="-96.0 96.0" />
+      <motor name="right_ankle_roll" joint="right_ankle_roll" gear="1" ctrllimited="true" ctrlrange="-96 96" />
+      <motor name="waist_yaw" joint="waist_yaw" gear="1" ctrllimited="true" ctrlrange="-96 96" />
+      <motor name="left_shoulder_pitch" joint="left_shoulder_pitch" gear="1" ctrllimited="true" ctrlrange="-96 96" />
+      <motor name="left_shoulder_roll" joint="left_shoulder_roll" gear="1" ctrllimited="true" ctrlrange="-96 96" />
+      <motor name="left_shoulder_yaw" joint="left_shoulder_yaw" gear="1" ctrllimited="true" ctrlrange="-12 12" />
+      <motor name="left_elbow_pitch" joint="left_elbow_pitch" gear="1" ctrllimited="true" ctrlrange="-96 96" />    
+      <motor name="right_shoulder_pitch" joint="right_shoulder_pitch" gear="1" ctrllimited="true" ctrlrange="-96 96" />
+      <motor name="right_shoulder_roll" joint="right_shoulder_roll" gear="1" ctrllimited="true" ctrlrange="-96 96" />
+      <motor name="right_shoulder_yaw" joint="right_shoulder_yaw" gear="1" ctrllimited="true" ctrlrange="-12 12" />
+      <motor name="right_elbow_pitch" joint="right_elbow_pitch" gear="1" ctrllimited="true" ctrlrange="-96 96" />    
+  </actuator>
+
+  <sensor>
+      <framequat name="baselink-quat" objtype="site" objname="site_imu" />
+      <velocimeter name="baselink-velocity" site="site_imu" />
+      <gyro name="baselink-gyro" site="site_imu" />
+      <accelerometer name="baselink-baseAcc" site="site_imu" />
+  </sensor>
+
+  <keyframe>
+    <key name="home"
+      qpos="0 0 0.70 1 0 0 0 
+      -0.15 0 0 0.3 -0.15 0 -0.15 0 0 0.3 -0.15 0
+       0 0 0 0 0 0 0 0 0" />
+  </keyframe>
+</mujoco>

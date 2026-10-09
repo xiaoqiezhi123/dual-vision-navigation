@@ -1,0 +1,12 @@
+package custom_lcm;
+struct system2Algorithm_packet
+{
+    // 1. 头帧（2字节）：固定值0xeb90
+    int16_t header;
+    // 2. 帧类别（1字节）：自定义帧类型（如0x01=驱动控制帧）
+    int16_t frame_type;
+    // 3. 数据字段 补充一下结构使用frame解析（59字节）：默认填充0，预留扩展
+    int8_t data[59];
+    // 4. 校验码（1字节）：下标2~31字节求和取模255
+    int8_t checksum;
+}

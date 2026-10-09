@@ -1,0 +1,42 @@
+<launch>
+
+
+  <arg name="use_sim_time" default="true"/>
+
+
+
+  <!-- <node pkg="tf" type="static_transform_publisher" name="world_to_robot" args="0.0 0.0 0.9 0 -3.14 0 /map /odom 200"/> -->
+
+
+
+
+  <node pkg="elevation_mapping_cupy" type="publish_map_frame.py" name="publish_map_frame" />
+
+
+
+
+	<node pkg="point_lio" type="pointlio_mapping" name="laserMapping" output="screen" > 
+    <rosparam command="load" file="$(find point_lio)/config/avia.yaml" />
+    <param name="use_imu_as_input" type="bool" value="0"/> <!--change to 1 to use IMU as input of Point-LIO-->
+    <param name="prop_at_freq_of_imu" type="bool" value="1"/>
+    <param name="check_satu" type="bool" value="1"/>
+    <param name="init_map_size" type="int" value="20"/>
+    <param name="point_filter_num" type="int" value="1"/> <!--4, 3--> 
+    <param name="space_down_sample" type="bool" value="0" />  
+    <param name="filter_size_surf" type="double" value="0.05" /> <!--0.5, 0.3, 0.2, 0.15, 0.1--> 
+    <param name="filter_size_map" type="double" value="0.05" /> <!--0.5, 0.3, 0.15, 0.1-->
+    <param name="ivox_nearby_type" type="int" value="6" /> <!--0.5, 0.3, 0.15, 0.1-->
+    <param name="runtime_pos_log_enable" type="bool" value="0" /> <!--1-->
+	</node>
+
+
+    <node pkg="elevation_mapping_cupy" type="elevation_mapping_node" name="elevation_mapping" output="screen">
+        <rosparam command="load" file="$(find elevation_mapping_cupy)/config/core/core_param_phybot.yaml"/>
+        <rosparam command="load" file="$(find elevation_mapping_cupy)/config/setups/turtle_bot/turtle_bot_simple_phybot.yaml"/>
+    </node>
+
+
+
+
+
+</launch>
