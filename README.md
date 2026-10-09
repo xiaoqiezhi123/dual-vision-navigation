@@ -1,4 +1,4 @@
-# 双视觉导航：cuVSLAM + NavSide
+# 双视觉导航：cuVSLAM + SRU
 
 本仓库整理双相机导航项目的四个模块：cuVSLAM 源码、Orbbec 定位部署、NavSide 导航推理，以及 WASD 键盘控制。相机 A 提供位姿，相机 B 提供深度，NavSide 将导航速度通过 UDP 发给机器人控制端。
 
