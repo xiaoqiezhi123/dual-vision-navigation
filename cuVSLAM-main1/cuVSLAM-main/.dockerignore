@@ -1,0 +1,9 @@
+build/
+.git/
+**/__pycache__/
+*.pyc
+.venv/
+**/*.egg-info/
+slam_map/
+test_data/**/*.edex
+.claude/
