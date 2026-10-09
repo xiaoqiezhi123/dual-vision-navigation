@@ -1,0 +1,35 @@
+{
+  "map_id": "viz_test_01",
+  "map_version": "v1",
+  "source_type": "cuvslam_data_mdb",
+  "source_map_dir": "/home/amov/cuvslam_migrate-9.1/orbbec/viz_test_01",
+  "source_db_sha256": "2fbba123be60204de32f3042ee317513c93aa858142c92b503dc91ca5ca9b42b",
+  "source_db_size_bytes": 201224192,
+  "extractor_version_or_sha256": "74b337f8eaff4c6fce5bd424a689c1252b730b8e910d3a20475d797252cd3214",
+  "source_geometry_sha256": "af5fb8564d086438b7991d9680b65975e19c09c8fef1754273d7da5242de4520",
+  "coordinate_frame": "cuvslam_map_frame (X右 Y下 Z前; 平面=XZ)",
+  "resolution_m": 0.05,
+  "origin_xz": [
+    -114.2,
+    -75.05
+  ],
+  "width": 4002,
+  "height": 3279,
+  "row_axis": "Z",
+  "col_axis": "X",
+  "unknown_policy": "不可通行（与障碍同）",
+  "robot_radius_m": 0.5,
+  "safety_margin_m": 0.0,
+  "soft_band_m": 0.3,
+  "clearance_semantics": "conservative lower bound: max(0, center_dist - sqrt(2)*r)",
+  "height_filter": {
+    "ground_y": 0.0,
+    "min": 0.5,
+    "max": 5.0
+  },
+  "reviewed": false,
+  "review_note": "人工核验后置 reviewed=true",
+  "schema_version": 1,
+  "grid_sha256": "f98ee4be88c75a80e1d5edf9ba773b5b99ba054ec0287ef34710d242598d6774",
+  "annotations_sha256": "af5fb8564d086438b7991d9680b65975e19c09c8fef1754273d7da5242de4520"
+}

@@ -1,0 +1,99 @@
+<launch>
+    <arg name="wname" default="stairs"/>
+    <arg name="rname" default="phybot"/>
+    <param name="robot_name" type="str" value="$(arg rname)"/>
+    <param name="ros_namespace" type="str" value="/$(arg rname)_gazebo/"/>
+    <arg name="robot_path" value="(find $(arg rname)_description)"/>
+    <arg name="dollar" value="$"/>
+
+    <arg name="use_sim_time" default="true"/>
+
+	<!-- <arg name="UAV_model" value="$(find livox_laser_simulation)/models/sensors_only/model.sdf" /> -->
+	<!-- This is where we set the initial position of the UAV-->
+	<!-- <arg name="x" value="0" /> -->
+  	<!-- <arg name="y" value="0" /> -->
+  	<!-- <arg name="z" value="0" /> -->
+
+
+    <!-- <node pkg="fast_lio" type="imu_lidar_correct.py" name="imu_norm" output="screen"/> -->
+  <!-- <node pkg="faster_lio" type="imu_lidar_correct.py" name="imu_norm" output="screen"/> -->
+	<!-- <node pkg="point_lio" type="imu_lidar_correct.py" name="imu_filter"/> -->
+
+
+    
+   <node pkg="livox_repub" type="livox_repub_online_node" name="livox_repub_online_node" output="screen" >
+      <param name="livox_raw_message_name"    type="string"   value="/livox/lidar" />
+      <param name="livox_points_message_name"    type="string"   value="/livox/points" />
+   </node>
+
+
+    <arg name="paused" default="true"/>
+    <arg name="gui" default="true"/>
+    <arg name="headless" default="false"/>
+    <arg name="debug" default="false"/>
+    
+    <include file="$(find gazebo_ros)/launch/empty_world.launch">
+        <arg name="world_name" value="$(find phybot_software)/gazebo_sim/worlds/$(arg wname).world"/>
+        <arg name="debug" value="$(arg debug)"/>
+        <arg name="gui" value="$(arg gui)"/>
+        <arg name="paused" value="$(arg paused)"/>
+        <!-- <arg name="use_sim_time" value="$(arg use_sim_time)"/> -->
+        <arg name="headless" value="$(arg headless)"/>
+    </include>
+
+    <!-- Load the URDF into the ROS Parameter Server -->
+    <param name="robot_description" textfile="$(find phybot_description)/urdf/phybot_v8_20.urdf"/>
+
+    <!-- Run a python script to the send a service call to gazebo_ros to spawn a URDF robot -->
+    <!-- Set trunk and joint positions at startup -->
+    <node pkg="gazebo_ros" type="spawn_model" name="spawn_model" respawn="false" output="screen"
+          args=" -urdf -x -10 -y 0.0 -z 1.0 -model $(arg rname)_gazebo -param robot_description "/>
+
+	<!-- <node pkg="gazebo_ros" type="spawn_model" name="spawn_lidar" respawn="false" output="screen"
+		args="-file $(arg UAV_model) -x $(arg x) -y $(arg y) -z $(arg z) -sdf -model iris_demo " /> -->
+
+        
+	<node name="rviz" pkg="rviz" type="rviz" args="-d $(find phybot_description)/urdf.rviz" />
+    <!-- <node name="rviz_lidar" pkg="rviz" type="rviz" args="-d $(find livox_laser_simulation)/rviz/test_pattern.rviz" /> -->
+
+
+
+
+
+    <!-- Load joint controller configurations from YAML file to parameter server -->
+    <rosparam file="$(arg dollar)$(arg robot_path)/config/robot_control.yaml" command="load"/>
+
+    <!-- load the controllers -->
+    <node pkg="controller_manager" type="spawner" name="controller_spawner" respawn="false"
+          output="screen" ns="/$(arg rname)_gazebo" args="joint_state_controller
+          left_hip_pitch_controller left_hip_roll_controller left_hip_yaw_controller  left_knee_controller left_ankle_pitch_controller left_ankle_roll_controller
+          right_hip_pitch_controller right_hip_roll_controller right_hip_yaw_controller  right_knee_controller right_ankle_pitch_controller  right_ankle_roll_controller 
+            waist_yaw_controller  waist_roll_controller
+          left_shoulder_pitch_controller left_shoulder_roll_controller left_elbow_pitch_controller
+          right_shoulder_pitch_controller right_shoulder_roll_controller right_elbow_pitch_controller
+          
+          "/>
+
+	<!-- <node name="spawn_model" pkg="gazebo_ros" type="spawn_model" respawn="false" output="screen"
+		args="-file $(arg UAV_model) -x $(arg x) -y $(arg y) -z $(arg z) -sdf -model iris_demo " /> -->
+
+        
+    <!-- convert joint states to TF transforms for rviz, etc -->
+    <node pkg="robot_state_publisher" type="robot_state_publisher" name="robot_state_publisher"
+          respawn="false" output="screen">
+        <remap from="/joint_states" to="/$(arg rname)_gazebo/joint_states"/>
+    </node>
+
+
+  <!-- <node pkg="tf" type="static_transform_publisher" name="world_to_robot" args="0.0 0.0 0.9 0 -3.14 0 /map /odom 200"/> -->
+
+
+
+
+
+
+</launch>
+
+
+
+

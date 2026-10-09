@@ -1,0 +1,62 @@
+{
+  "description": "Offline geometry probes, not navigation tasks",
+  "points": [
+    {
+      "id": "entry",
+      "xz": [
+        -0.5,
+        2.0
+      ]
+    },
+    {
+      "id": "lower_right",
+      "xz": [
+        -6.6,
+        5.2
+      ]
+    },
+    {
+      "id": "lower_left",
+      "xz": [
+        -30.2,
+        5.25
+      ]
+    },
+    {
+      "id": "upper_left",
+      "xz": [
+        -30.2,
+        13.5
+      ]
+    },
+    {
+      "id": "upper_right",
+      "xz": [
+        -6.6,
+        13.5
+      ]
+    }
+  ],
+  "pairs": [
+    [
+      "entry",
+      "lower_right"
+    ],
+    [
+      "lower_right",
+      "lower_left"
+    ],
+    [
+      "lower_left",
+      "upper_left"
+    ],
+    [
+      "upper_left",
+      "upper_right"
+    ],
+    [
+      "upper_right",
+      "lower_right"
+    ]
+  ]
+}

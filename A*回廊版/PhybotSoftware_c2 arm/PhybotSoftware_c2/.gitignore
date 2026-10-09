@@ -1,0 +1,11 @@
+DataPackage/build
+StateMachine/build
+ThirdParty
+build
+log
+Pino_Kinematics/build
+GaitPlanner/build
+RobotModel/build
+.catkin_tools
+.vscode
+logdata

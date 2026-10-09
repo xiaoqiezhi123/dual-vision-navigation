@@ -1,0 +1,78 @@
+# =============================================================================
+# 任务导航调度配置（task_nav_scheduler.py 读取；任务数据的唯一来源）
+#
+# 工作流：一键启动 → cuvslam 首帧自动 localize 锚定全局系 → 纯 VIO 位姿发给
+# NavSide、SRU 开始推理走第一段 → 到点后 SRU 输出清零、VIO 暂停、提示输入
+# localize → 锚定成功后更新位置继续下一段。大路径被切成多个小段导航。
+#
+# 任务点写在 cuVSLAM 参考地图全局系（OpenCV 约定：+X 右、+Y 下、+Z 前）。
+# 高度 y 一般与建图时的地面高度一致（抄建图运行中任意一次 [global] 打印值）。
+# 获取方法：map2d_picker.py 选点 / 推到目标点后手动 localize 抄坐标 / .rrd 轨迹读数。
+# =============================================================================
+
+# 参考地图名（任务点锚定目标，只读；cuvslam 脚本目录下的 <name> 子文件夹）
+# 临时改用 orbbec_map 验证调度器（111 在当前位姿锚定失败：其 last_pose 有 ~30° 倾斜
+# 或建图区域不含当前位置；orbbec_map 已实测可锚定）。验证后改回 111 或重建 111。
+#ref_map: "orbbec_map"
+ref_map: "viz_test_01"
+#ref_map: "1"
+
+# 任务点列表（cuVSLAM 全局系，米）：(x右, y下/高度, z前)
+task_points:
+#- [0.0, 0.0, 4.5]    # 任务点 1
+#  - [0.0, 0.0, 11.0]    # 任务点 2
+#  - [0.0, 0.0, 22.0]  # 任务点 3 —— 想加几个加几行
+  - [0.0, 0.0, 6.0]    # 任务点 1
+  - [-6.0, 0.0, 6.0]    # 任务点 2
+  - [-6.0, 0.0, 13.0]    # 任务点 3
+  - [-30.0, 0.0, 15.0]  # 任务点 4
+  
+  - [-30.0, 0.0, 6.0]   #任务点5
+
+# Z-up 世界系下机器人高度（米）。NavSide 的到达判定是 3D 距离，
+# goal 的 z 必须与机器人 z（bridge.py 硬编码 0.695）一致，否则 goal_reached 永不触发。
+robot_height_z: 0.695
+
+# 锚定结果与预期任务点的偏差上限（米，cuVSLAM 全局系 XZ 平面）。
+# 超限时调度器不推进任务点，提示重定位；可输入 force 强制推进。
+anchor_verify_tolerance_m: 5.0
+
+# 各阶段超时（秒）
+boot_ready_timeout_s: 60       # 两端进程启动就绪
+startup_anchor_timeout_s: 180  # 启动自动锚定（首帧 localize）
+anchor_timeout_s: 240          # 单次任务点锚定（三级由粗到细搜索）
+segment_arrive_timeout_s: 600  # 单段导航到达（超时仅告警，不自动干预）
+
+# 到达判定（SEGMENT 中由调度器用 cuVSLAM 实时位姿判定，不依赖 NavSide 机器人状态）：
+# cuVSLAM 每 0.1s 流 [SCHED] pose=(...) t=..，调度器算 XZ 平面距离（cuVSLAM 全局系）。
+arrive_tolerance_m: 1.0   # VIO 位姿距任务点 ≤ 该值判定到达（米，与 cuvslam 内建半径一致）
+arrive_confirm_s: 1.0     # 位姿需持续在容差内的时长（防噪声单帧误判，秒）
+
+# ---- cuVSLAM 子进程（SLAM 位姿源）----
+# 相机分工（实测）：CPC8763000MZ（相机 B）做 SLAM；CPC8763000J0（相机 A）做深度。
+# 相机 B 打不开 1280x720 深度流（固件/USB 降速，只有 1280x720@5），深度只能给相机 A。
+cuvslam_repo: "/home/amov/cuvslam_migrate-9.1"
+# 调度器会自动追加 "--ref-map <ref_map> --scheduler"。
+# --no-viz：不启动 Rerun 实时窗口（每帧图像编码+发送的背压会阻塞主循环，
+# 实测行进位姿流 1~1.7s 偶发卡顿；.rrd 仍落盘可事后回放。想开实时窗口就删掉它）。
+cuvslam_cmd: ["/home/amov/cuvslam_migrate-9.1/run_orbbec_tasknav.sh", "--no-viz"]
+
+# ---- NavSide 子进程（推理 + 控制，深度感知）----
+# 由调度器在独立交互终端窗口里运行：原始模式面板 + 键盘，按键 A/S/D/F/G
+# 最高优先级、随时可停车；调度器与它经文件通道通信（指令/状态）。
+navside_repo: "/home/amov/navside_real/NavSide_log/Navside-9.1"
+navside_cmd: ["/home/amov/navside_real/NavSide_log/Navside-9.1/scripts/run_nav.py", "--real",
+              "--config", "/home/amov/navside_real/NavSide_log/Navside-9.1/config/nav.yaml",
+              "--show-depth"]
+
+# ---- 子进程环境变量（在继承当前环境的基础上覆盖）----
+env:
+  cuvslam:
+    # SLAM 相机的序列号（双相机时务必填；空 = 枚举到的第一台，会抢 NavSide 的
+    # 深度相机导致 uvc_open failed -6。用 enumerate_devices.py 读出的 SN 填这里）
+    CUVSLAM_CAMERA_SERIAL: "CPC8763000MZ"
+  navside:
+    # NavSide 深度相机的序列号
+    NAVSIDE_CAMERA_SERIAL: "CPC8763000J0"
+    # 调度器与 NavSide 的通信通道（NAVSIDE_CMD_FILE / NAVSIDE_SCHED_FILE）
+    # 由调度器运行时自动注入，无需在此配置。

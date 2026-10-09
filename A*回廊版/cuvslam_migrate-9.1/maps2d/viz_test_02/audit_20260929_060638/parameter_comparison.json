@@ -1,0 +1,31 @@
+{
+  "manual_seam_candidate": [
+    {
+      "robot_radius_m": 0.5,
+      "safety_margin_m": 0,
+      "traversable_cells": 33100,
+      "components": 1
+    },
+    {
+      "robot_radius_m": 0.5,
+      "safety_margin_m": 0.05,
+      "traversable_cells": 30105,
+      "components": 1
+    },
+    {
+      "robot_radius_m": 0.5,
+      "safety_margin_m": 0.1,
+      "traversable_cells": 27116,
+      "components": 1
+    }
+  ],
+  "unverified_legacy_height_filter": {
+    "ground_y": 0,
+    "height_min": 0.5,
+    "height_max": 5,
+    "candidate_cells_in_annotation_roi": 11335,
+    "traversable_cells": 3840,
+    "components": 15,
+    "used_for_delivered_maps": false
+  }
+}

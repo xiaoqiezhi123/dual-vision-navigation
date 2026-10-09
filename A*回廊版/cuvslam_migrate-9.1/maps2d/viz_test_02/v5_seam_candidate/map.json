@@ -1,0 +1,33 @@
+{
+  "map_id": "viz_test_02",
+  "map_version": "v5_seam_candidate",
+  "source_type": "cuvslam_data_mdb",
+  "source_map_dir": "/home/amov/cuvslam_migrate-9.1/orbbec/viz_test_02",
+  "source_db_sha256": "c24f6b4993985e900ac7cf4966a1d000916a42e731308cddb0d2e00afe9763e7",
+  "source_db_size_bytes": 297926656,
+  "extractor_version_or_sha256": "74b337f8eaff4c6fce5bd424a689c1252b730b8e910d3a20475d797252cd3214",
+  "source_geometry_sha256": "db91041f7c5f37685f2b7a9112af705c529e26c6e714d68e232a1b9fbf3c5671",
+  "coordinate_frame": "cuvslam_map_frame (X右 Y下 Z前; 平面=XZ)",
+  "resolution_m": 0.05,
+  "origin_xz": [
+    -112.25,
+    -62.75
+  ],
+  "width": 3597,
+  "height": 2950,
+  "row_axis": "Z",
+  "col_axis": "X",
+  "unknown_policy": "不可通行（与障碍同）",
+  "robot_radius_m": 0.5,
+  "safety_margin_m": 0.0,
+  "soft_band_m": 0.3,
+  "clearance_semantics": "conservative lower bound: max(0, center_dist - sqrt(2)*r)",
+  "height_filter": null,
+  "reviewed": false,
+  "review_note": "离线 A* 验证通过；新增两处自由区接缝，待确认现场连通后审核。",
+  "schema_version": 1,
+  "grid_sha256": "223c5e65f6593bf66c575abcfb261bb201172109321d0bc427ec1ff1badc4488",
+  "annotations_sha256": "9196a9cbf1d2b687f05575df6e32b2e2c567e3a6f873a569856a819e05c84199",
+  "annotation_input_sha256": "b0e44b6a2dd4493a3519228171c121eb7a473fc433b3e6c4132265ff28ec8968",
+  "validation_report": "../audit_20260929_060638/seam_candidate/validation.json"
+}

@@ -1,0 +1,1671 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- This URDF was automatically created by SolidWorks to URDF Exporter! Originally created by Stephen Brawner (brawner@gmail.com) 
+     Commit Version: 1.6.0-4-g7f85cfe  Build Version: 1.6.7995.38578
+     For more information, please see http://wiki.ros.org/sw_urdf_exporter -->
+<robot
+  name="phybot_urdf">
+  <link
+    name="base_link">
+    <inertial>
+      <origin
+        xyz="-5.4954E-07 0.0014987 -0.043143"
+        rpy="0 0 0" />
+      <mass
+        value="1.3664" />
+      <inertia
+        ixx="0.0081217"
+        ixy="7.0406E-08"
+        ixz="-3.8289E-09"
+        iyy="0.0073381"
+        iyz="-2.7812E-08"
+        izz="0.0096706" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://phybot_urdf/meshes/base_link.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.49804 0.49804 0.49804 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://phybot_urdf/meshes/base_link.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <link
+    name="left_hip_pitch">
+    <inertial>
+      <origin
+        xyz="-5.8417E-09 0.047044 -1.263E-07"
+        rpy="0 0 0" />
+      <mass
+        value="1.3596" />
+      <inertia
+        ixx="0.003437"
+        ixy="-1.1133E-09"
+        ixz="1.312E-08"
+        iyy="0.0042831"
+        iyz="-2.9931E-09"
+        izz="0.0043037" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://phybot_urdf/meshes/left_hip_pitch.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.49804 0.49804 0.49804 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://phybot_urdf/meshes/left_hip_pitch.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="left_hip_pitch"
+    type="revolute">
+    <origin
+      xyz="0 0.049982 -0.028857"
+      rpy="-0.5236 0 0" />
+    <parent
+      link="base_link" />
+    <child
+      link="left_hip_pitch" />
+    <axis
+      xyz="0 1 0" />
+    <limit
+      lower="-2.62"
+      upper="2.62"
+      effort="300"
+      velocity="9.21" />
+  </joint>
+  <link
+    name="left_hip_roll">
+    <inertial>
+      <origin
+        xyz="0.00890484594272468 -5.28612271732953E-08 -0.0281584101285025"
+        rpy="0 0 0" />
+      <mass
+        value="1.23462260567308" />
+      <inertia
+        ixx="0.00186516755642299"
+        ixy="6.70472601124523E-10"
+        ixz="0.000101774765806727"
+        iyy="0.00203357396671484"
+        iyz="-6.84385143296561E-10"
+        izz="0.00162566763303001" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://phybot_urdf/meshes/left_hip_roll.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.498039215686275 0.498039215686275 0.498039215686275 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://phybot_urdf/meshes/left_hip_roll.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="left_hip_roll"
+    type="revolute">
+    <origin
+      xyz="-0.0075 0.108 0"
+      rpy="0.5236 0 0" />
+    <parent
+      link="left_hip_pitch" />
+    <child
+      link="left_hip_roll" />
+    <axis
+      xyz="1 0 0" />
+    <limit
+      lower="-0.17"
+      upper="1.92"
+      effort="150"
+      velocity="8.9" />
+  </joint>
+  <link
+    name="left_hip_yaw">
+    <inertial>
+      <origin
+        xyz="-0.00684956033555942 -0.000648552047123968 -0.110182432003039"
+        rpy="0 0 0" />
+      <mass
+        value="5.92706684653278" />
+      <inertia
+        ixx="0.053570222204992"
+        ixy="-0.000111465149284726"
+        ixz="-0.00252756487667482"
+        iyy="0.0568418797460869"
+        iyz="0.000706730593448882"
+        izz="0.0204701373231584" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://phybot_urdf/meshes/left_hip_yaw.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.498039215686275 0.498039215686275 0.498039215686275 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://phybot_urdf/meshes/left_hip_yaw.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="left_hip_yaw"
+    type="revolute">
+    <origin
+      xyz="0.008 0 -0.115000000000001"
+      rpy="0 0 0" />
+    <parent
+      link="left_hip_roll" />
+    <child
+      link="left_hip_yaw" />
+    <axis
+      xyz="0 0 1" />
+    <limit
+      lower="-1.57"
+      upper="1.57"
+      effort="150"
+      velocity="8.37" />
+  </joint>
+  <link
+    name="left_knee">
+    <inertial>
+      <origin
+        xyz="0.00888132221761184 -2.526693669333E-05 -0.189166150785485"
+        rpy="0 0 0" />
+      <mass
+        value="2.86580567401214" />
+      <inertia
+        ixx="0.0365702447546563"
+        ixy="-3.402420935922E-06"
+        ixz="0.000720633838543639"
+        iyy="0.0371266236459863"
+        iyz="5.71835600167021E-05"
+        izz="0.00362802324218237" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://phybot_urdf/meshes/left_knee.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.498039215686275 0.498039215686275 0.498039215686275 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://phybot_urdf/meshes/left_knee.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="left_knee"
+    type="revolute">
+    <origin
+      xyz="-0.0205 0 -0.31"
+      rpy="0 0 0" />
+    <parent
+      link="left_hip_yaw" />
+    <child
+      link="left_knee" />
+    <axis
+      xyz="0 1 0" />
+    <limit
+      lower="0"
+      upper="2.62"
+      effort="300"
+      velocity="9.21" />
+  </joint>
+  <link
+    name="left_ankle_pitch">
+    <inertial>
+      <origin
+        xyz="0 -2.77555756156289E-17 2.22044604925031E-16"
+        rpy="0 0 0" />
+      <mass
+        value="0.0183186267630812" />
+      <inertia
+        ixx="2.01314075365105E-06"
+        ixy="1.24966021001981E-23"
+        ixz="-1.65376573846015E-38"
+        iyy="2.8050397230968E-06"
+        iyz="-7.96945492490358E-23"
+        izz="2.01314075365105E-06" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://phybot_urdf/meshes/left_ankle_pitch.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.498039215686275 0.498039215686275 0.498039215686275 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://phybot_urdf/meshes/left_ankle_pitch.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="left_ankle_pitch"
+    type="revolute">
+    <origin
+      xyz="0.01 0 -0.405000000000001"
+      rpy="0 0 0" />
+    <parent
+      link="left_knee" />
+    <child
+      link="left_ankle_pitch" />
+    <axis
+      xyz="0 1 0" />
+    <limit
+      lower="0.52"
+      upper="-0.87"
+      effort="100"
+      velocity="8.79" />
+  </joint>
+  <link
+    name="left_ankle_roll">
+    <inertial>
+      <origin
+        xyz="0.045764494354473 0.00174458059395877 -0.0249741900929585"
+        rpy="0 0 0" />
+      <mass
+        value="0.58288492626838" />
+      <inertia
+        ixx="0.000549848903677835"
+        ixy="1.0414016980014E-05"
+        ixz="2.45520739954244E-05"
+        iyy="0.00197688217629267"
+        iyz="6.06100914262313E-06"
+        izz="0.00205232235004821" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://phybot_urdf/meshes/left_ankle_roll.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.498039215686275 0.498039215686275 0.498039215686275 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://phybot_urdf/meshes/left_ankle_roll.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="left_ankle_roll"
+    type="revolute">
+    <origin
+      xyz="0.01 0 -0.039999999999999"
+      rpy="0 0 0" />
+    <parent
+      link="left_ankle_pitch" />
+    <child
+      link="left_ankle_roll" />
+    <axis
+      xyz="1 0 0" />
+    <limit
+      lower="-0.35"
+      upper="0.35"
+      effort="30"
+      velocity="12.56" />
+  </joint>
+  <link
+    name="left_toe">
+    <inertial>
+      <origin
+        xyz="0.0312088862072716 -0.00110848718799073 -0.00631164400238449"
+        rpy="0 0 0" />
+      <mass
+        value="0.151351299824755" />
+      <inertia
+        ixx="0.000107884145460954"
+        ixy="-1.00453177830066E-05"
+        ixz="-1.1154452307217E-05"
+        iyy="8.14084806266429E-05"
+        iyz="1.88975923201335E-06"
+        izz="0.000157306535604642" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://phybot_urdf/meshes/left_toe.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.498039215686275 0.498039215686275 0.498039215686275 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://phybot_urdf/meshes/left_toe.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="left_toe"
+    type="revolute">
+    <origin
+      xyz="0.123182437256307 -0.00351262176397898 -0.0340737307540999"
+      rpy="0 0 0" />
+    <parent
+      link="left_ankle_roll" />
+    <child
+      link="left_toe" />
+    <axis
+      xyz="0 1 0" />
+    <limit
+      lower="-0.35"
+      upper="0.35"
+      effort="30"
+      velocity="12.56" />
+  </joint>
+  <link
+    name="right_hip_pitch">
+    <inertial>
+      <origin
+        xyz="-4.56163092183061E-08 -0.0470438768387433 -1.05882848145528E-07"
+        rpy="0 0 0" />
+      <mass
+        value="1.35964020557471" />
+      <inertia
+        ixx="0.00343703784206259"
+        ixy="2.7662060766003E-10"
+        ixz="-7.84771095408119E-09"
+        iyy="0.00428307765360446"
+        iyz="3.69873495980472E-09"
+        izz="0.00430371225683057" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://phybot_urdf/meshes/right_hip_pitch.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.498039215686275 0.498039215686275 0.498039215686275 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://phybot_urdf/meshes/right_hip_pitch.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="right_hip_pitch"
+    type="revolute">
+    <origin
+      xyz="0 -0.049982 -0.028857"
+      rpy="0.5236 0 0" />
+    <parent
+      link="base_link" />
+    <child
+      link="right_hip_pitch" />
+    <axis
+      xyz="0 1 0" />
+    <limit
+      lower="-2.62"
+      upper="2.62"
+      effort="300"
+      velocity="9.21" />
+  </joint>
+  <link
+    name="right_hip_roll">
+    <inertial>
+      <origin
+        xyz="0.00890485756708381 -2.2817975425804E-08 -0.0281584849611693"
+        rpy="0 0 0" />
+      <mass
+        value="1.23462673386496" />
+      <inertia
+        ixx="0.00186517108928788"
+        ixy="-9.88429746528276E-10"
+        ixz="0.000101774222037618"
+        iyy="0.00203357637552442"
+        iyz="-1.14684287447236E-10"
+        izz="0.00162566881868773" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://phybot_urdf/meshes/right_hip_roll.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.498039215686275 0.498039215686275 0.498039215686275 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://phybot_urdf/meshes/right_hip_roll.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="right_hip_roll"
+    type="revolute">
+    <origin
+      xyz="-0.00749999999999997 -0.107999999999959 0"
+      rpy="-0.523598775598299 0 0" />
+    <parent
+      link="right_hip_pitch" />
+    <child
+      link="right_hip_roll" />
+    <axis
+      xyz="1 0 0" />
+    <limit
+      lower="0.17"
+      upper="-1.92"
+      effort="150"
+      velocity="8.37" />
+  </joint>
+  <link
+    name="right_hip_yaw">
+    <inertial>
+      <origin
+        xyz="-0.00685185533140136 0.000647665669411879 -0.110180229351076"
+        rpy="0 0 0" />
+      <mass
+        value="5.927415023901" />
+      <inertia
+        ixx="0.0535738179751749"
+        ixy="0.000111311096856331"
+        ixz="-0.00252807564181361"
+        iyy="0.056845040029036"
+        iyz="-0.000707078815872077"
+        izz="0.0204696671750945" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://phybot_urdf/meshes/right_hip_yaw.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.498039215686275 0.498039215686275 0.498039215686275 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://phybot_urdf/meshes/right_hip_yaw.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="right_hip_yaw"
+    type="revolute">
+    <origin
+      xyz="0.008 0 -0.115000000000001"
+      rpy="0 0 0" />
+    <parent
+      link="right_hip_roll" />
+    <child
+      link="right_hip_yaw" />
+    <axis
+      xyz="0 0 1" />
+    <limit
+      lower="-1.57"
+      upper="1.57"
+      effort="150"
+      velocity="8.37" />
+  </joint>
+  <link
+    name="right_knee">
+    <inertial>
+      <origin
+        xyz="0.00887957086423326 2.46027134978288E-05 -0.189167952524956"
+        rpy="0 0 0" />
+      <mass
+        value="2.86579694651627" />
+      <inertia
+        ixx="0.0365694392767585"
+        ixy="3.38767739167544E-06"
+        ixz="0.000719830098220531"
+        iyy="0.0371257837882473"
+        iyz="-5.73219103974067E-05"
+        izz="0.00362800415722587" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://phybot_urdf/meshes/right_knee.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.498039215686275 0.498039215686275 0.498039215686275 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://phybot_urdf/meshes/right_knee.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="right_knee"
+    type="revolute">
+    <origin
+      xyz="-0.0205 0 -0.31"
+      rpy="0 0 0" />
+    <parent
+      link="right_hip_yaw" />
+    <child
+      link="right_knee" />
+    <axis
+      xyz="0 1 0" />
+    <limit
+      lower="0"
+      upper="2.62"
+      effort="300"
+      velocity="9.21" />
+  </joint>
+  <link
+    name="right_ankle_pitch">
+    <inertial>
+      <origin
+        xyz="-0.00112042913576674 2.46027134978288E-05 0.215832047475045"
+        rpy="0 0 0" />
+      <mass
+        value="2.86579694651627" />
+      <inertia
+        ixx="0.0365694392767585"
+        ixy="3.38767739167543E-06"
+        ixz="0.000719830098220531"
+        iyy="0.0371257837882473"
+        iyz="-5.73219103974067E-05"
+        izz="0.00362800415722587" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://phybot_urdf/meshes/right_ankle_pitch.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.498039215686275 0.498039215686275 0.498039215686275 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://phybot_urdf/meshes/right_ankle_pitch.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="right_ankle_pitch"
+    type="revolute">
+    <origin
+      xyz="0.01 0 -0.405000000000001"
+      rpy="0 0 0" />
+    <parent
+      link="right_knee" />
+    <child
+      link="right_ankle_pitch" />
+    <axis
+      xyz="0 1 0" />
+    <limit
+      lower="0.52"
+      upper="-0.87"
+      effort="100"
+      velocity="8.79" />
+  </joint>
+  <link
+    name="right_ankle_roll">
+    <inertial>
+      <origin
+        xyz="0.0457644557853165 -0.00174482721565708 -0.0249741749896993"
+        rpy="0 0 0" />
+      <mass
+        value="0.582885599063613" />
+      <inertia
+        ixx="0.000549849367853888"
+        ixy="-1.04002299395753E-05"
+        ixz="2.45535740223507E-05"
+        iyy="0.00197688531032874"
+        iyz="-6.0611736921834E-06"
+        izz="0.00205232581112901" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://phybot_urdf/meshes/right_ankle_roll.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.498039215686275 0.498039215686275 0.498039215686275 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://phybot_urdf/meshes/right_ankle_roll.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="right_ankle_roll"
+    type="revolute">
+    <origin
+      xyz="0.01 0 -0.039999999999999"
+      rpy="0 0 0" />
+    <parent
+      link="right_ankle_pitch" />
+    <child
+      link="right_ankle_roll" />
+    <axis
+      xyz="1 0 0" />
+    <limit
+      lower="-0.35"
+      upper="0.35"
+      effort="30"
+      velocity="12.56" />
+  </joint>
+  <link
+    name="right_toe">
+    <inertial>
+      <origin
+        xyz="0.031208333024767 0.00110852051652532 -0.00631141458484707"
+        rpy="0 0 0" />
+      <mass
+        value="0.15134806527019" />
+      <inertia
+        ixx="0.00010788277336988"
+        ixy="1.00444586554181E-05"
+        ixz="-1.11535904084662E-05"
+        iyy="8.14037283751907E-05"
+        iyz="-1.8897943155268E-06"
+        izz="0.000157300969529082" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://phybot_urdf/meshes/right_toe.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.498039215686275 0.498039215686275 0.498039215686275 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://phybot_urdf/meshes/right_toe.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="right_toe"
+    type="revolute">
+    <origin
+      xyz="0.123182437256307 0.00351262176397898 -0.0340737307540999"
+      rpy="0 0 0" />
+    <parent
+      link="right_ankle_roll" />
+    <child
+      link="right_toe" />
+    <axis
+      xyz="0 1 0" />
+    <limit
+      lower="-0.35"
+      upper="0.35"
+      effort="30"
+      velocity="12.56" />
+  </joint>
+  <link
+    name="waist_yaw">
+    <inertial>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <mass
+        value="0" />
+      <inertia
+        ixx="0"
+        ixy="0"
+        ixz="0"
+        iyy="0"
+        iyz="0"
+        izz="0" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://phybot_urdf/meshes/waist_yaw.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="1 1 1 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://phybot_urdf/meshes/waist_yaw.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="waist_yaw"
+    type="revolute">
+    <origin
+      xyz="0 0.00149999999999999 0.0183123771881523"
+      rpy="0 0 0" />
+    <parent
+      link="base_link" />
+    <child
+      link="waist_yaw" />
+    <axis
+      xyz="0 0 1" />
+    <limit
+      lower="-1.57"
+      upper="1.57"
+      effort="150"
+      velocity="8.37" />
+  </joint>
+  <link
+    name="waist_roll">
+    <inertial>
+      <origin
+        xyz="0.0537565454805741 6.77209772391245E-06 0.194442815996198"
+        rpy="0 0 0" />
+      <mass
+        value="15.7264655356382" />
+      <inertia
+        ixx="0.182926424302058"
+        ixy="-2.66642669564786E-06"
+        ixz="-0.0155692900508175"
+        iyy="0.156347906061924"
+        iyz="1.90129905393498E-06"
+        izz="0.137761377388844" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://phybot_urdf/meshes/waist_roll.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.498039215686275 0.498039215686275 0.498039215686275 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://phybot_urdf/meshes/waist_roll.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="waist_roll"
+    type="revolute">
+    <origin
+      xyz="-0.052 0 0.109988006523714"
+      rpy="0 0 0" />
+    <parent
+      link="waist_yaw" />
+    <child
+      link="waist_roll" />
+    <axis
+      xyz="1 0 0" />
+    <limit
+      lower="-0.79"
+      upper="0.79"
+      effort="150"
+      velocity="8.9" />
+  </joint>
+  <link
+    name="neck_yaw">
+    <inertial>
+      <origin
+        xyz="-1.94400461804578E-08 0.00145250253135347 0.0583295636066872"
+        rpy="0 0 0" />
+      <mass
+        value="0.353411959812392" />
+      <inertia
+        ixx="0.000583814550280034"
+        ixy="5.86890858157788E-10"
+        ixz="-3.68670067752064E-10"
+        iyy="0.000595511104933177"
+        iyz="3.80744321027839E-05"
+        izz="0.000199767403525452" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://phybot_urdf/meshes/neck_yaw.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.498039215686275 0.498039215686275 0.498039215686275 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://phybot_urdf/meshes/neck_yaw.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="neck_yaw"
+    type="revolute">
+    <origin
+      xyz="0.0347185061825246 0 0.310586613960455"
+      rpy="0 0 0" />
+    <parent
+      link="waist_roll" />
+    <child
+      link="neck_yaw" />
+    <axis
+      xyz="0 0 1" />
+    <limit
+      lower="-1.57"
+      upper="1.57"
+      effort="36"
+      velocity="8.16" />
+  </joint>
+  <link
+    name="neck_pitch">
+    <inertial>
+      <origin
+        xyz="0.0080891647388154 -0.000998029809911289 0.0484192867222913"
+        rpy="0 0 0" />
+      <mass
+        value="4.02477571240348" />
+      <inertia
+        ixx="0.014508146174763"
+        ixy="-4.88628215461777E-05"
+        ixz="-0.00278080369185414"
+        iyy="0.0195655800136078"
+        iyz="-7.33119430682266E-05"
+        izz="0.0148567083323038" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://phybot_urdf/meshes/neck_pitch.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.498039215686275 0.498039215686275 0.498039215686275 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://phybot_urdf/meshes/neck_pitch.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="neck_pitch"
+    type="revolute">
+    <origin
+      xyz="0 0 0.1325"
+      rpy="0 0 0" />
+    <parent
+      link="neck_yaw" />
+    <child
+      link="neck_pitch" />
+    <axis
+      xyz="0 1 0" />
+    <limit
+      lower="-0.52"
+      upper="0.52"
+      effort="36"
+      velocity="8.16" />
+  </joint>
+  <link
+    name="left_shoulder_pitch">
+    <inertial>
+      <origin
+        xyz="-0.00409861584801387 0.0384064791145967 -0.0029212124577811"
+        rpy="0 0 0" />
+      <mass
+        value="0.430913848347476" />
+      <inertia
+        ixx="0.000769053581818735"
+        ixy="-9.73812777361568E-05"
+        ixz="7.40738499166362E-06"
+        iyy="0.000546919001283554"
+        iyz="-1.16611373614357E-05"
+        izz="0.000699427991686729" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://phybot_urdf/meshes/left_shoulder_pitch.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.498039215686275 0.498039215686275 0.498039215686275 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://phybot_urdf/meshes/left_shoulder_pitch.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="left_shoulder_pitch"
+    type="revolute">
+    <origin
+      xyz="0.0347185061825262 0.121477245849652 0.280582242497215"
+      rpy="0 0 0" />
+    <parent
+      link="waist_roll" />
+    <child
+      link="left_shoulder_pitch" />
+    <axis
+      xyz="0 1 0" />
+    <limit
+      lower="0.87"
+      upper="-2.79"
+      effort="150"
+      velocity="8.9" />
+  </joint>
+  <link
+    name="left_shoulder_roll">
+    <inertial>
+      <origin
+        xyz="0.000919634523004437 -6.78012689325769E-08 -0.0188626860024786"
+        rpy="0 0 0" />
+      <mass
+        value="0.872132570790387" />
+      <inertia
+        ixx="0.00184764836355787"
+        ixy="2.37949264516325E-08"
+        ixz="9.68265860760107E-06"
+        iyy="0.00208626747486298"
+        iyz="2.26234756547108E-10"
+        izz="0.00106695088705063" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://phybot_urdf/meshes/left_shoulder_roll.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.498039215686275 0.498039215686275 0.498039215686275 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://phybot_urdf/meshes/left_shoulder_roll.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="left_shoulder_roll"
+    type="revolute">
+    <origin
+      xyz="0 0.098526740149795 -0.007495628536759"
+      rpy="0 0 0" />
+    <parent
+      link="left_shoulder_pitch" />
+    <child
+      link="left_shoulder_roll" />
+    <axis
+      xyz="1 0 0" />
+    <limit
+      lower="-0.17"
+      upper="3.14"
+      effort="150"
+      velocity="8.9" />
+  </joint>
+  <link
+    name="left_shoulder_yaw">
+    <inertial>
+      <origin
+        xyz="-0.000741340257152327 0.00172837029108128 -0.045347593776922"
+        rpy="0 0 0" />
+      <mass
+        value="1.29580245647958" />
+      <inertia
+        ixx="0.003860982945997"
+        ixy="5.11854955954266E-07"
+        ixz="3.58974413623521E-05"
+        iyy="0.00408719129321641"
+        iyz="0.00017150393960228"
+        izz="0.00194228376851051" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://phybot_urdf/meshes/left_shoulder_yaw.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.498039215686275 0.498039215686275 0.498039215686275 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://phybot_urdf/meshes/left_shoulder_yaw.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="left_shoulder_yaw"
+    type="revolute">
+    <origin
+      xyz="0 0 -0.112500000000001"
+      rpy="0 0 0" />
+    <parent
+      link="left_shoulder_roll" />
+    <child
+      link="left_shoulder_yaw" />
+    <axis
+      xyz="0 0 1" />
+    <limit
+      lower="-1.57"
+      upper="1.57"
+      effort="36"
+      velocity="8.16" />
+  </joint>
+  <link
+    name="left_elbow_pitch">
+    <inertial>
+      <origin
+        xyz="2.91386876745403E-08 -0.00194444111216199 -0.0486145666327832"
+        rpy="0 0 0" />
+      <mass
+        value="0.134277357497783" />
+      <inertia
+        ixx="0.000115963695275018"
+        ixy="1.77089253664355E-11"
+        ixz="6.08356979133671E-11"
+        iyy="0.000119764003899846"
+        iyz="-1.19798557834028E-05"
+        izz="4.6050439252046E-05" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://phybot_urdf/meshes/left_elbow_pitch.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.498039215686275 0.498039215686275 0.498039215686275 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://phybot_urdf/meshes/left_elbow_pitch.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="left_elbow_pitch"
+    type="revolute">
+    <origin
+      xyz="0 0 -0.137499999999999"
+      rpy="0 0 0" />
+    <parent
+      link="left_shoulder_yaw" />
+    <child
+      link="left_elbow_pitch" />
+    <axis
+      xyz="0 1 0" />
+    <limit
+      lower="0"
+      upper="-2.36"
+      effort="36"
+      velocity="8.16" />
+  </joint>
+  <link
+    name="left_elbow_yaw">
+    <inertial>
+      <origin
+        xyz="-0.000728976072652168 0.000947826134960972 -0.0638484807247587"
+        rpy="0 0 0" />
+      <mass
+        value="1.18906235767847" />
+      <inertia
+        ixx="0.00664457124214696"
+        ixy="3.82346928932523E-07"
+        ixz="-5.80061167610389E-05"
+        iyy="0.00666973540163739"
+        iyz="3.24114855374423E-05"
+        izz="0.000996701066356745" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://phybot_urdf/meshes/left_elbow_yaw.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.498039215686275 0.498039215686275 0.498039215686275 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://phybot_urdf/meshes/left_elbow_yaw.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="left_elbow_yaw"
+    type="revolute">
+    <origin
+      xyz="0 0 -0.0875000000000005"
+      rpy="0 0 0" />
+    <parent
+      link="left_elbow_pitch" />
+    <child
+      link="left_elbow_yaw" />
+    <axis
+      xyz="0 0 1" />
+    <limit
+      lower="-1.57"
+      upper="1.57"
+      effort="36"
+      velocity="8.16" />
+  </joint>
+  <link
+    name="right_shoulder_pitch">
+    <inertial>
+      <origin
+        xyz="-0.00409868183432404 -0.0384062586372634 -0.00292250703426522"
+        rpy="0 0 0" />
+      <mass
+        value="0.430913894550757" />
+      <inertia
+        ixx="0.000769051002425444"
+        ixy="9.7380903033573E-05"
+        ixz="7.40655276016863E-06"
+        iyy="0.000546919441618695"
+        iyz="1.16775846836209E-05"
+        izz="0.000699423718964854" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://phybot_urdf/meshes/right_shoulder_pitch.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.498039215686275 0.498039215686275 0.498039215686275 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://phybot_urdf/meshes/right_shoulder_pitch.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="right_shoulder_pitch"
+    type="revolute">
+    <origin
+      xyz="0.0347185061825262 -0.124469273850758 0.280582242497215"
+      rpy="0 0 0" />
+    <parent
+      link="waist_roll" />
+    <child
+      link="right_shoulder_pitch" />
+    <axis
+      xyz="0 0.997118638904385 0.0758578931256809" />
+    <limit
+      lower="-0.87"
+      upper="2.79"
+      effort="150"
+      velocity="8.9" />
+  </joint>
+  <link
+    name="right_shoulder_roll">
+    <inertial>
+      <origin
+        xyz="0.000919631817683991 -8.87287022188765E-08 -0.0188626813457305"
+        rpy="0 0 0" />
+      <mass
+        value="0.872132578376757" />
+      <inertia
+        ixx="0.00184764847804442"
+        ixy="2.42108495159225E-08"
+        ixz="9.68262292607561E-06"
+        iyy="0.00208626778979797"
+        iyz="8.7671177643978E-10"
+        izz="0.00106695124152487" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://phybot_urdf/meshes/right_shoulder_roll.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.498039215686275 0.498039215686275 0.498039215686275 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://phybot_urdf/meshes/right_shoulder_roll.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="right_shoulder_roll"
+    type="revolute">
+    <origin
+      xyz="0 -0.098526740149795 -0.007495628536759"
+      rpy="0 0 0" />
+    <parent
+      link="right_shoulder_pitch" />
+    <child
+      link="right_shoulder_roll" />
+    <axis
+      xyz="1 0 0" />
+    <limit
+      lower="0.17"
+      upper="-3.14"
+      effort="150"
+      velocity="8.9" />
+  </joint>
+  <link
+    name="right_shoulder_yaw">
+    <inertial>
+      <origin
+        xyz="-0.000741857302540606 -0.00172799325571732 -0.0453464650304515"
+        rpy="0 0 0" />
+      <mass
+        value="1.2958441227996" />
+      <inertia
+        ixx="0.00386097698610349"
+        ixy="-4.9584184484772E-07"
+        ixz="3.59628499625131E-05"
+        iyy="0.00408718800769966"
+        iyz="-0.000171496953065485"
+        izz="0.00194226081354547" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://phybot_urdf/meshes/right_shoulder_yaw.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.498039215686275 0.498039215686275 0.498039215686275 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://phybot_urdf/meshes/right_shoulder_yaw.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="right_shoulder_yaw"
+    type="revolute">
+    <origin
+      xyz="0 0 -0.112500000000001"
+      rpy="0 0 0" />
+    <parent
+      link="right_shoulder_roll" />
+    <child
+      link="right_shoulder_yaw" />
+    <axis
+      xyz="0 0 1" />
+    <limit
+      lower="-1.57"
+      upper="1.57"
+      effort="30"
+      velocity="12.56" />
+  </joint>
+  <link
+    name="right-elbow_pitch">
+    <inertial>
+      <origin
+        xyz="-2.06529561404267E-08 0.00194435630528891 -0.0486147250116656"
+        rpy="0 0 0" />
+      <mass
+        value="0.134276889442258" />
+      <inertia
+        ixx="0.000115963692345264"
+        ixy="-3.00829122903038E-12"
+        ixz="-8.82855404070622E-11"
+        iyy="0.000119764003217396"
+        iyz="1.19798533108379E-05"
+        izz="4.60504383486541E-05" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://phybot_urdf/meshes/right-elbow_pitch.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.498039215686275 0.498039215686275 0.498039215686275 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://phybot_urdf/meshes/right-elbow_pitch.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="right_elbow_pitch"
+    type="revolute">
+    <origin
+      xyz="0 0 -0.137499999999999"
+      rpy="0 0 0" />
+    <parent
+      link="right_shoulder_yaw" />
+    <child
+      link="right-elbow_pitch" />
+    <axis
+      xyz="0 1 0" />
+    <limit
+      lower="0"
+      upper="-2.36"
+      effort="36"
+      velocity="8.16" />
+  </joint>
+  <link
+    name="right_elbow_yaw">
+    <inertial>
+      <origin
+        xyz="-0.000718465529941762 -0.000950492319590379 -0.0638721954855592"
+        rpy="0 0 0" />
+      <mass
+        value="1.18878870062103" />
+      <inertia
+        ixx="0.00664486783157471"
+        ixy="-3.64706200245772E-07"
+        ixz="-5.77429879869725E-05"
+        iyy="0.00667009805819351"
+        iyz="-3.22503553048931E-05"
+        izz="0.000996756346005752" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://phybot_urdf/meshes/right_elbow_yaw.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.498039215686275 0.498039215686275 0.498039215686275 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://phybot_urdf/meshes/right_elbow_yaw.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="right_elbow_yaw"
+    type="revolute">
+    <origin
+      xyz="0 0 -0.0875000000000005"
+      rpy="0 0 0" />
+    <parent
+      link="right-elbow_pitch" />
+    <child
+      link="right_elbow_yaw" />
+    <axis
+      xyz="0 0 1" />
+    <limit
+      lower="-1.57"
+      upper="1.57"
+      effort="36"
+      velocity="8.16" />
+  </joint>
+</robot>

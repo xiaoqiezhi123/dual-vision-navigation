@@ -1,0 +1,15 @@
+formulateBasePosTask: 1000
+formulateBaseOriTask: 1000
+weightTangentialContactRorceMin: 0.001
+weightNormalContactRorceMin: 0.0001
+weightContactRorceRef: 10
+
+weightLegJointPosSwing: 100
+weightLegJointPosSup: 500
+weightArmJointPos: 100
+weightWaistJointPos: 100
+
+weightFootPosSwing: 100
+weightFootPosSup: 500
+weightFootOriSwing: 100
+weightFootOriSup: 500

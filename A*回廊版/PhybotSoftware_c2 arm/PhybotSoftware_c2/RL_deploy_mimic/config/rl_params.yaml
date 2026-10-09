@@ -1,0 +1,44 @@
+mimic_policy_path: ../RL_deploy_mimic/model/model_wave_15000-jit.pt
+motion_lib_path: ../RL_deploy_mimic/data/motion_wave_right05_smooth_poses_100hz.csv
+decimation: 10
+num_proprio: 72
+num_proprio_mimic: 73
+num_task_obs: 255
+num_js_commands: 3
+num_mimic_commands: 4
+clip_obs: 100.0
+clip_actions_lower: -40.0
+clip_actions_upper: 40.0
+
+rl_p: [100.0, 100.0, 100.0, 100.0, 50.0, 50.0,
+       100.0, 100.0, 100.0, 100.0, 50.0, 50.0,
+       100.0,
+       50.0, 50.0, 5.0, 50.0,
+       50.0, 50.0, 5.0, 50.0, ]
+
+rl_d: [10.0, 10.0, 10.0, 10.0, 5.0, 5.0,
+       10.0, 10.0, 10.0, 10.0, 5.0, 5.0,
+       10.0,
+       5.0, 5.0, 5.0, 5.0, 
+       5.0, 5.0, 5.0, 5.0, ]
+
+num_of_dofs: 21
+history_len: 20
+num_of_heights: 625
+action_scale: 0.25
+lin_vel_scale: 2.0
+ang_vel_scale: 0.25
+dof_pos_scale: 1.0
+dof_vel_scale: 0.05
+torque_limits: [200.0, 80.0, 58.0, 80.0, 58.0, 9.0,
+                200.0, 80.0, 58.0, 80.0, 58.0, 9.0,
+                58.0,
+                58.0, 58.0, 9.0, 58.0,
+                58.0, 58.0, 9.0, 58.0]
+
+default_dof_pos: [-0.345, 0.053, 0.029, 0.704, -0.357, 0.053,
+                  -0.345, -0.053, -0.029, 0.704, -0.357, -0.053,
+                   0.0,
+                   0.0, 0.1, 0.0, -0.1,
+                   0.0, -0.1, 0.0, -0.1]
+useless_joint_id: []
